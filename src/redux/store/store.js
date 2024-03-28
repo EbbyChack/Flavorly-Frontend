@@ -3,6 +3,7 @@ import authReducer from "../reducers/authReducer";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import expireReducer from "redux-persist-expire";
+import recipeReducer from "../reducers/recipeReducer";
 
 
 
@@ -24,6 +25,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  recipes: recipeReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

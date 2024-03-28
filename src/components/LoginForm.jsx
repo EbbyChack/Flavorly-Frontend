@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { fetchLogin } from "../redux/actions/auth";
+import { Link } from "react-router-dom";
+import { Toast } from "bootstrap";
+import { ToastContainer } from "react-toastify";
 
 function LoginForm() {
   const [username, setUsername] = useState("");
@@ -19,6 +22,7 @@ function LoginForm() {
   };
   return (
     <div className="container my-5">
+      <ToastContainer />
       <div className="row justify-content-center">
         <div className="col-4">
           <h1>Login</h1>
@@ -51,6 +55,11 @@ function LoginForm() {
               Submit
             </button>
           </form>
+
+          <div className="mt-3">
+            <p>Don't have an account?</p>
+            <Link to="/register">Register</Link>
+          </div>
         </div>
       </div>
     </div>
