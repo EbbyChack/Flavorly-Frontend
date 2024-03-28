@@ -1,8 +1,12 @@
 import "./App.css";
-import { Col, Container, Row } from "react-bootstrap";
+import LoginForm from "./components/LoginForm";
 
 function App() {
-  return <div className=""></div>;
+  return (
+    <div>
+      <LoginForm />
+    </div>
+  );
 }
 
 export default App;
