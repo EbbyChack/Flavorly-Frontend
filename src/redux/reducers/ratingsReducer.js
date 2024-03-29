@@ -16,6 +16,7 @@ const ratingsSlice = createSlice({
       state.averageRating.averageRating = action.payload.averageRating / 2;
       state.averageRating.numberOfRatings = action.payload.numberOfRatings;
     },
+    
   },
 });
 

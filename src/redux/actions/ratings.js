@@ -20,3 +20,25 @@ export const fetchAverageRating = (id) => {
     }
   };
 };
+
+ export const addNewRating = (addRatingObj) => {
+   return async (dispatch) => {
+     try {
+       const response = await fetch(url + `api/Rating`, {
+         method: "POST",
+         headers: {
+           "Content-Type": "application/json",
+           Authorization: `Bearer ${token()}`,
+         },
+         body: JSON.stringify(addRatingObj),
+       });
+       if (response.ok) {
+        dispatch({ type: 'ADD_RATING', payload: addRatingObj });;
+       } else {
+         throw new Error("Add rating failed");
+       }
+     } catch (error) {
+       console.log(error);
+     }
+   };
+ };

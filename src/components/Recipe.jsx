@@ -3,8 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchSingleRecipe } from "../redux/actions/recipes";
 import { formatDate, formatDateNoTime } from "../utils/utils";
-import { fetchAverageRating } from "../redux/actions/ratings";
+import { addNewRating, fetchAverageRating } from "../redux/actions/ratings";
 import ReactStars from "react-rating-stars-component";
+import { jwtDecode as jwt_decode } from "jwt-decode";
+import YouTube from "react-youtube";
 
 function Recipe() {
   const { id } = useParams();
@@ -13,6 +15,10 @@ function Recipe() {
   const ingredientsAndCategories = useSelector((state) => state.ingredientsAndCategories.ingredientsAndCategories);
   const averageRating = useSelector((state) => state.ratings.averageRating);
 
+  const token = useSelector((state) => state.auth.loggedProfile);
+  const decodedToken = jwt_decode(token);
+  const pathway = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier";
+  const userId = decodedToken[pathway];
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -23,7 +29,19 @@ function Recipe() {
     if (recipe) {
       dispatch(fetchAverageRating(id));
     }
-  }, [recipe]);
+  }, [id, addNewRating]);
+
+  const newRating = (value) => {
+    console.log(value);
+    const ratingObj = {
+      idRecipeFk: id,
+      idUserFk: userId,
+      ratingValue: value * 2,
+    };
+    dispatch(addNewRating(ratingObj)).then(() => {
+      dispatch(fetchAverageRating(id));
+    });
+  };
 
   return (
     <div>
@@ -31,7 +49,9 @@ function Recipe() {
         <div className="container my-5">
           <h1>{recipe.nameRecipe}</h1>
           <h2>Rating:</h2>
-          <ReactStars count={5} value={averageRating.averageRating} size={60} isHalf={true} edit={false} />
+          {averageRating.averageRating && (
+            <ReactStars count={5} value={averageRating.averageRating} size={60} isHalf={true} edit={false} />
+          )}
           <h6>N° ratings: {averageRating.numberOfRatings}</h6>
 
           <img
@@ -89,6 +109,11 @@ function Recipe() {
           <h2>Instructions</h2>
           <p>{recipe.instructions}</p>
           <iframe width="100%" height="515" src={recipe.videoUrl}></iframe>
+
+          <div>
+            <h2>Add your rating</h2>
+            <ReactStars count={5} size={60} isHalf={true} edit={true} onChange={(value) => newRating(value)} />
+          </div>
 
           <div>
             <h2>Comments</h2>
