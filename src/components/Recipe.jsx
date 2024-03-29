@@ -3,13 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchSingleRecipe } from "../redux/actions/recipes";
 import { formatDate, formatDateNoTime } from "../utils/utils";
-
+import { fetchAverageRating } from "../redux/actions/ratings";
+import ReactStars from "react-rating-stars-component";
 
 function Recipe() {
   const { id } = useParams();
 
   const recipe = useSelector((state) => state.recipes.singleRecipe);
   const ingredientsAndCategories = useSelector((state) => state.ingredientsAndCategories.ingredientsAndCategories);
+  const averageRating = useSelector((state) => state.ratings.averageRating);
 
   const dispatch = useDispatch();
 
@@ -17,13 +19,21 @@ function Recipe() {
     dispatch(fetchSingleRecipe(id));
   }, [id]);
 
-  
+  useEffect(() => {
+    if (recipe) {
+      dispatch(fetchAverageRating(id));
+    }
+  }, [recipe]);
 
   return (
     <div>
       {recipe ? (
         <div className="container my-5">
           <h1>{recipe.nameRecipe}</h1>
+          <h2>Rating:</h2>
+          <ReactStars count={5} value={averageRating.averageRating} size={60} isHalf={true} edit={false} />
+          <h6>N° ratings: {averageRating.numberOfRatings}</h6>
+
           <img
             src={recipe.mainImg}
             alt={"img" + recipe.idRecipe}

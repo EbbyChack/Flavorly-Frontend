@@ -5,6 +5,7 @@ import storage from "redux-persist/lib/storage";
 import expireReducer from "redux-persist-expire";
 import recipeReducer from "../reducers/recipeReducer";
 import ingredientsAndCatagoriesReducer from "../reducers/ingAndCatReducer";
+import ratingsReducer from "../reducers/ratingsReducer";
 
 const persistConfig = {
   key: "root",
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   recipes: recipeReducer,
   ingredientsAndCategories: ingredientsAndCatagoriesReducer,
+  ratings: ratingsReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
