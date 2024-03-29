@@ -1,7 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom'
+import { fetchIngredientsAndCategories } from '../redux/actions/ingAndCat';
 
 function Home() {
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchIngredientsAndCategories());
+  }, []);
+
   return (
     <div>
         <ul>

@@ -2,6 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   recipes: [],
+  singleRecipe: {},
+ 
 };
 
 const recipeSlice = createSlice({
@@ -11,8 +13,13 @@ const recipeSlice = createSlice({
     setAllRecipes(state, action) {
       state.recipes = action.payload;
     },
+    setSingleRecipe(state, action) {
+      state.singleRecipe = action.payload;
+     
+    }
+    
   },
 });
 
-export const { setAllRecipes } = recipeSlice.actions;
+export const { setAllRecipes, setSingleRecipe } = recipeSlice.actions;
 export default recipeSlice.reducer;

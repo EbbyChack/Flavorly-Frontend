@@ -4,13 +4,12 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import expireReducer from "redux-persist-expire";
 import recipeReducer from "../reducers/recipeReducer";
-
-
+import ingredientsAndCatagoriesReducer from "../reducers/ingAndCatReducer";
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["auth"],
+  whitelist: ["auth", "ingredientsAndCategories"],
 
   transforms: [
     expireReducer("auth", {
@@ -26,6 +25,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   auth: authReducer,
   recipes: recipeReducer,
+  ingredientsAndCategories: ingredientsAndCatagoriesReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
