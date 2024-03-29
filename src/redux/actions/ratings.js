@@ -42,3 +42,25 @@ export const fetchAverageRating = (id) => {
      }
    };
  };
+
+ export const updateRating = (ratingId, updateRatingObj) => {
+    return async (dispatch) => {
+      try {
+        const response = await fetch(url + `api/Rating/${ratingId}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token()}`,
+          },
+          body: JSON.stringify(updateRatingObj),
+        });
+        if (response.ok) {
+          dispatch({ type: 'UPDATE_RATING', payload: updateRatingObj });
+        } else {
+          throw new Error("Update rating failed");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  }

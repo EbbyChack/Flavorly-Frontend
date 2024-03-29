@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllRecipes } from "../redux/actions/recipes";
 import { Link } from "react-router-dom";
+import { Button } from "bootstrap";
+import CreateRecipeForm from "./CreateRecipeForm";
 
 function AllRecipes() {
   const recipes = useSelector((state) => state.recipes) || { recipes: [] };
@@ -12,10 +14,21 @@ function AllRecipes() {
     dispatch(fetchAllRecipes());
   }, []);
 
+  const [modalShow, setModalShow] = useState(false);
+
   return (
     <div>
-      <h1>All recipes</h1>
-      <div className="container">
+      <div className="container my-5">
+      <CreateRecipeForm show={modalShow} onHide={() => setModalShow(false)} />
+        <div className="d-flex justify-content-between align-items-center">
+          <h1>All recipes</h1>
+          <button className="btn btn-dark" onClick={() => setModalShow(true)}>
+            Add recipe
+          </button>
+
+          
+        </div>
+
         <div className="row">
           {recipes.recipes &&
             recipes.recipes.map((recipe) => {

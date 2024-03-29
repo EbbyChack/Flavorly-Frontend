@@ -3,7 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   recipes: [],
   singleRecipe: {},
- 
 };
 
 const recipeSlice = createSlice({
@@ -15,9 +14,7 @@ const recipeSlice = createSlice({
     },
     setSingleRecipe(state, action) {
       state.singleRecipe = action.payload;
-     
-    }
-    
+    },
   },
 });
 

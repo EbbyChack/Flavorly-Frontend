@@ -35,4 +35,24 @@ export const fetchSingleRecipe = (id) => async (dispatch) => {
   }
 };
 
-
+export const addRecipe = (recipeObj) => async (dispatch) => {
+  try {
+    const response = await fetch(url + "api/recipe", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token()}`,
+      },
+      body: JSON.stringify(recipeObj),
+    });
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+      dispatch({ type: "ADD_RECIPE", payload: data });
+    } else {
+      throw new Error("Add recipe failed");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -3,42 +3,71 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchSingleRecipe } from "../redux/actions/recipes";
 import { formatDate, formatDateNoTime } from "../utils/utils";
-import { addNewRating, fetchAverageRating } from "../redux/actions/ratings";
+import { addNewRating, fetchAverageRating, updateRating } from "../redux/actions/ratings";
 import ReactStars from "react-rating-stars-component";
 import { jwtDecode as jwt_decode } from "jwt-decode";
 import YouTube from "react-youtube";
 
 function Recipe() {
+  //getting the id from the url
   const { id } = useParams();
 
+  //getting the recipe from the store
   const recipe = useSelector((state) => state.recipes.singleRecipe);
+
+  //getting ingredients and categories from the store
   const ingredientsAndCategories = useSelector((state) => state.ingredientsAndCategories.ingredientsAndCategories);
+
+  //getting the average rating from the store
   const averageRating = useSelector((state) => state.ratings.averageRating);
 
+  //getting the userid from the token using jwt-decode
   const token = useSelector((state) => state.auth.loggedProfile);
   const decodedToken = jwt_decode(token);
   const pathway = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier";
   const userId = decodedToken[pathway];
+
   const dispatch = useDispatch();
 
+  //fetching the recipe
   useEffect(() => {
     dispatch(fetchSingleRecipe(id));
   }, [id]);
 
+  //fetching the average rating
   useEffect(() => {
     if (recipe) {
       dispatch(fetchAverageRating(id));
     }
-  }, [id, addNewRating]);
+  }, [id, addNewRating, updateRating]);
 
+  //function to add a new rating
   const newRating = (value) => {
-    console.log(value);
     const ratingObj = {
       idRecipeFk: id,
       idUserFk: userId,
       ratingValue: value * 2,
     };
     dispatch(addNewRating(ratingObj)).then(() => {
+      dispatch(fetchAverageRating(id));
+    });
+  };
+  //checking if the user has rated the recipe and getting the user rating
+  const userHasRated = recipe.ratings && recipe.ratings.some((rating) => rating.idUserFk == userId);
+  const userRating = recipe.ratings && recipe.ratings.find((rating) => rating.idUserFk == userId);
+
+  //function to update the rating
+  const updateRatingFunc = (value) => {
+    const ratingObj = {
+      idRecipeFk: id,
+      idUserFk: userId,
+      ratingValue: value * 2,
+    };
+
+    const ratingId = userRating.idRating;
+
+    dispatch(updateRating(ratingId, ratingObj)).then(() => {
+      // Fetch the updated average rating after updating the rating
       dispatch(fetchAverageRating(id));
     });
   };
@@ -49,10 +78,9 @@ function Recipe() {
         <div className="container my-5">
           <h1>{recipe.nameRecipe}</h1>
           <h2>Rating:</h2>
-          {averageRating.averageRating && (
-            <ReactStars count={5} value={averageRating.averageRating} size={60} isHalf={true} edit={false} />
-          )}
-          <h6>N° ratings: {averageRating.numberOfRatings}</h6>
+
+          <ReactStars count={5} value={averageRating.averageRating} size={60} isHalf={true} edit={false} />
+          <h6>N° ratings: {averageRating.numberOfRatings ? averageRating.numberOfRatings : 0}</h6>
 
           <img
             src={recipe.mainImg}
@@ -76,9 +104,11 @@ function Recipe() {
           <p>{formatDateNoTime(recipe.dateAdded)}</p>
           <h2>Categories</h2>
           <ul>
+            {/* mapping through the categories and getting the category name */}
             {recipe.recipeCategories &&
               recipe.recipeCategories.map((category) => {
                 if (ingredientsAndCategories.categories) {
+                  //searching for the category name
                   const categoryDetails = ingredientsAndCategories.categories.find(
                     (cat) => cat.idCategory === category.idCategoryFk
                   );
@@ -111,8 +141,15 @@ function Recipe() {
           <iframe width="100%" height="515" src={recipe.videoUrl}></iframe>
 
           <div>
-            <h2>Add your rating</h2>
-            <ReactStars count={5} size={60} isHalf={true} edit={true} onChange={(value) => newRating(value)} />
+            {userHasRated ? <h2>Update your rating</h2> : <h2>Rate this recipe</h2>}
+            <ReactStars
+              count={5}
+              size={60}
+              value={userHasRated ? userRating.ratingValue / 2 : 0}
+              isHalf={true}
+              edit={true}
+              onChange={(value) => (userHasRated ? updateRatingFunc(value) : newRating(value))}
+            />
           </div>
 
           <div>
