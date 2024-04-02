@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   recipes: [],
   singleRecipe: {},
+  userFavs: [],
 };
 
 const recipeSlice = createSlice({
@@ -15,8 +16,12 @@ const recipeSlice = createSlice({
     setSingleRecipe(state, action) {
       state.singleRecipe = action.payload;
     },
+    //need to test this
+    setUserFavs(state, action) {
+      state.userFavs = action.payload;
+    }
   },
 });
 
-export const { setAllRecipes, setSingleRecipe } = recipeSlice.actions;
+export const { setAllRecipes, setSingleRecipe, setUserFavs } = recipeSlice.actions;
 export default recipeSlice.reducer;

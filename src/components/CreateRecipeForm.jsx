@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { addRecipe } from "../redux/actions/recipes";
-import { Dropdown } from "react-bootstrap";
+
 import { Toast } from "bootstrap";
 import { ToastContainer, toast } from "react-toastify";
 import ReactSelect from "react-select";
@@ -37,23 +37,23 @@ function CreateRecipeForm(props) {
   const notify = () => toast.error("Please fill all fields!");
   const handleSubmit = (e) => {
     e.preventDefault();
-     if (
-       !namerecipe ||
-       !description ||
-       !cookingtime ||
-       !servings ||
-       !difficulty ||
-       !instructions ||
-       !mainimg ||
-       !img2 ||
-       !img3 ||
-       !videourl ||
-       !ingredientsid ||
-       !categoriesid
-     ) {
-       notify();
-       return;
-     }
+    if (
+      !namerecipe ||
+      !description ||
+      !cookingtime ||
+      !servings ||
+      !difficulty ||
+      !instructions ||
+      !mainimg ||
+      !img2 ||
+      !img3 ||
+      !videourl ||
+      !ingredientsid ||
+      !categoriesid
+    ) {
+      notify();
+      return;
+    }
     const recipeObj = {
       namerecipe,
       description,
@@ -69,7 +69,6 @@ function CreateRecipeForm(props) {
       recipeCategoriesIds: categoriesid,
     };
 
-    
     dispatch(addRecipe(recipeObj));
   };
   return (

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { fetchLogin } from "../redux/actions/auth";
 import { Link } from "react-router-dom";
-import { Toast } from "bootstrap";
 import { ToastContainer } from "react-toastify";
 
 function LoginForm() {

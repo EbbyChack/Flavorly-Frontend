@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { fetchRegister } from "../redux/actions/auth";
 import { ToastContainer, toast } from "react-toastify";
-import { Toast } from "bootstrap";
+
 
 function Register() {
   const [username, setUsername] = useState("");

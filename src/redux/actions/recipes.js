@@ -1,5 +1,5 @@
 import { token, url } from "../../utils/utils";
-import { setAllRecipes, setSingleRecipe } from "../reducers/recipeReducer";
+import { setAllRecipes, setSingleRecipe, setUserFavs } from "../reducers/recipeReducer";
 
 export const fetchAllRecipes = () => async (dispatch) => {
   try {
@@ -56,3 +56,108 @@ export const addRecipe = (recipeObj) => async (dispatch) => {
     console.log(error);
   }
 };
+
+
+//need to test this
+export const addUserFav = (userFavObj) => async (dispatch) => {
+  try {
+    const response = await fetch(url + "api/userfavs", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token()}`,
+      },
+      body: JSON.stringify(userFavObj),
+    });
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+      dispatch({ type: "ADD_USER_FAV", payload: data });
+    } else {
+      throw new Error("Add user fav failed");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteUserFav = (id) => async (dispatch) => {
+  try {
+    const response = await fetch(url + `api/userfavs/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token()}`,
+      },
+    });
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+      dispatch({ type: "DELETE_USER_FAV", payload: id });
+    } else {
+      throw new Error("Delete user fav failed");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const fetchUserFavs = (id) => async (dispatch) => {
+  try {
+    const response = await fetch(url + `api/userfavs/${id}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token()}`,
+      },
+    });
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+      dispatch(setUserFavs(data));
+    } else {
+      throw new Error("Fetch user favs failed");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const addComment = (commentObj) => async (dispatch) => {
+  try {
+    const response = await fetch(url + "api/comment", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token()}`,
+      },
+      body: JSON.stringify(commentObj),
+    });
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+      dispatch({ type: "ADD_COMMENT", payload: data });
+    } else {
+      throw new Error("Add comment failed");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const softDeleteComment = (id) => async (dispatch) => {
+  try {
+    const response = await fetch(url + `api/comment/${id}`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token()}`,
+      },
+    });
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+      dispatch({ type: "SOFT_DELETE_COMMENT", payload: id });
+    } else {
+      throw new Error("Soft delete comment failed");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}

@@ -4,29 +4,29 @@ import { fetchAllRecipes } from "../redux/actions/recipes";
 import { Link } from "react-router-dom";
 import { Button } from "bootstrap";
 import CreateRecipeForm from "./CreateRecipeForm";
+import { setUserFavs } from "../redux/reducers/recipeReducer";
 
 function AllRecipes() {
   const recipes = useSelector((state) => state.recipes) || { recipes: [] };
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchAllRecipes());
-  }, []);
+  useEffect(() => dispatch(fetchAllRecipes()), []);
+
+  //need to check this
+  useEffect(() => dispatch(setUserFavs()), []);
 
   const [modalShow, setModalShow] = useState(false);
 
   return (
     <div>
       <div className="container my-5">
-      <CreateRecipeForm show={modalShow} onHide={() => setModalShow(false)} />
+        <CreateRecipeForm show={modalShow} onHide={() => setModalShow(false)} />
         <div className="d-flex justify-content-between align-items-center">
           <h1>All recipes</h1>
           <button className="btn btn-dark" onClick={() => setModalShow(true)}>
             Add recipe
           </button>
-
-          
         </div>
 
         <div className="row">

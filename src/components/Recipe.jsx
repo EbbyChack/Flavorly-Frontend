@@ -1,12 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { fetchSingleRecipe } from "../redux/actions/recipes";
+import { addComment, addUserFav, deleteUserFav, fetchSingleRecipe, softDeleteComment } from "../redux/actions/recipes";
 import { formatDate, formatDateNoTime } from "../utils/utils";
 import { addNewRating, fetchAverageRating, updateRating } from "../redux/actions/ratings";
 import ReactStars from "react-rating-stars-component";
 import { jwtDecode as jwt_decode } from "jwt-decode";
-import YouTube from "react-youtube";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
+import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
 
 function Recipe() {
   //getting the id from the url
@@ -53,8 +55,8 @@ function Recipe() {
     });
   };
   //checking if the user has rated the recipe and getting the user rating
-  const userHasRated = recipe.ratings && recipe.ratings.some((rating) => rating.idUserFk == userId);
-  const userRating = recipe.ratings && recipe.ratings.find((rating) => rating.idUserFk == userId);
+  const userHasRated = recipe.ratings && recipe.ratings.some((rating) => rating.idUserFk === userId);
+  const userRating = recipe.ratings && recipe.ratings.find((rating) => rating.idUserFk === userId);
 
   //function to update the rating
   const updateRatingFunc = (value) => {
@@ -71,12 +73,56 @@ function Recipe() {
       dispatch(fetchAverageRating(id));
     });
   };
+  //need to test this
+  //this line checks if the user has already liked the recipe
+  const userHasLiked = useSelector((state) => state.userFavs.includes(id)) ? true : false;
+  const userFavId = useSelector((state) => state.userFavs.find((fav) => fav.idRecipeFk === id)?.id);
+  //function to like the recipe
+  const handleLike = () => {
+    if (userHasLiked) {
+      dispatch(deleteUserFav(userFavId));
+    } else {
+      const userFavObj = {
+        idRecipeFk: id,
+        idUserFk: userId,
+      };
+      dispatch(addUserFav(userFavObj));
+    }
+  };
+
+  const [commentText, setCommentText] = useState("");
+
+  const handleCommentSubmit = (e) => {
+    e.preventDefault();
+    const commentObj = {
+      idRecipeFk: id,
+      idUserFk: userId,
+      commentText: commentText,
+    };
+    //need to test this
+    //dispatching the action to add a comment
+    dispatch(addComment(commentObj)).then(() => {
+      // Fetch the updated recipe after adding the comment
+      dispatch(fetchSingleRecipe(id));
+    });
+    setCommentText("");
+  };
+
+  const handleDeleteComment = (commentId) => {
+    dispatch(softDeleteComment(id)).then(() => {
+      // Fetch the updated recipe after deleting the comment
+      dispatch(fetchSingleRecipe(id));
+    });
+  };
 
   return (
     <div>
       {recipe ? (
         <div className="container my-5">
           <h1>{recipe.nameRecipe}</h1>
+          <button onClick={handleLike} className="like-button">
+            <FontAwesomeIcon icon={userHasLiked ? solidHeart : regularHeart} />
+          </button>
           <h2>Rating:</h2>
 
           <ReactStars count={5} value={averageRating.averageRating} size={60} isHalf={true} edit={false} />
@@ -154,6 +200,17 @@ function Recipe() {
 
           <div>
             <h2>Comments</h2>
+            <div>
+              <h2>Add a comment</h2>
+              <form onSubmit={handleCommentSubmit}>
+                <textarea
+                  value={commentText}
+                  onChange={(e) => setCommentText(e.target.value)}
+                  placeholder="Write your comment here..."
+                />
+                <button type="submit">Submit</button>
+              </form>
+            </div>
             <div className="row">
               {recipe.comments && recipe.comments.length > 0 ? (
                 recipe.comments.map((comment) => {
@@ -163,6 +220,11 @@ function Recipe() {
                         <div className="col-4">
                           <p>{comment.username}</p>
                           <p>{comment.commentText}</p>
+                          {comment.idUserFk === userId && (
+                            <button onClick={() => handleDeleteComment(comment.id)}>
+                              <FontAwesomeIcon icon={faTrash} />
+                            </button>
+                          )}
                         </div>
                         <div className="col-4">
                           <p>{formatDate(comment.datePosted)}</p>
