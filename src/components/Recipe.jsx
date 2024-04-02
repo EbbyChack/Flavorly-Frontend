@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { addComment, addUserFav, deleteUserFav, fetchSingleRecipe, softDeleteComment } from "../redux/actions/recipes";
+import {
+  addComment,
+  addUserFav,
+  deleteUserFav,
+  fetchSingleRecipe,
+  fetchUserFavs,
+  softDeleteComment,
+} from "../redux/actions/recipes";
 import { formatDate, formatDateNoTime } from "../utils/utils";
 import { addNewRating, fetchAverageRating, updateRating } from "../redux/actions/ratings";
 import ReactStars from "react-rating-stars-component";
@@ -23,6 +30,9 @@ function Recipe() {
   //getting the average rating from the store
   const averageRating = useSelector((state) => state.ratings.averageRating);
 
+  //getting userfavs from the store
+  const userFavs = useSelector((state) => state.recipes.userFavs);
+
   //getting the userid from the token using jwt-decode
   const token = useSelector((state) => state.auth.loggedProfile);
   const decodedToken = jwt_decode(token);
@@ -31,17 +41,11 @@ function Recipe() {
 
   const dispatch = useDispatch();
 
-  //fetching the recipe
   useEffect(() => {
     dispatch(fetchSingleRecipe(id));
+    dispatch(fetchAverageRating(id));
+    dispatch(fetchUserFavs(userId));
   }, [id]);
-
-  //fetching the average rating
-  useEffect(() => {
-    if (recipe) {
-      dispatch(fetchAverageRating(id));
-    }
-  }, [id, addNewRating, updateRating]);
 
   //function to add a new rating
   const newRating = (value) => {
@@ -55,8 +59,8 @@ function Recipe() {
     });
   };
   //checking if the user has rated the recipe and getting the user rating
-  const userHasRated = recipe.ratings && recipe.ratings.some((rating) => rating.idUserFk === userId);
-  const userRating = recipe.ratings && recipe.ratings.find((rating) => rating.idUserFk === userId);
+  const userHasRated = recipe.ratings && recipe.ratings.some((rating) => rating.idUserFk == userId);
+  const userRating = recipe.ratings && recipe.ratings.find((rating) => rating.idUserFk == userId);
 
   //function to update the rating
   const updateRatingFunc = (value) => {
@@ -74,58 +78,68 @@ function Recipe() {
     });
   };
   //need to test this
+
   //this line checks if the user has already liked the recipe
-  const userHasLiked = useSelector((state) => state.userFavs.includes(id)) ? true : false;
-  const userFavId = useSelector((state) => state.userFavs.find((fav) => fav.idRecipeFk === id)?.id);
+  const userHasLiked = userFavs && userFavs.some((fav) => fav.idRecipeFk == id);
+
+  const userFav = userFavs && userFavs.find((fav) => fav.idRecipeFk == id);
+  const userFavId = userFav ? userFav.idUserFav : null;
+
   //function to like the recipe
   const handleLike = () => {
     if (userHasLiked) {
-      dispatch(deleteUserFav(userFavId));
+      dispatch(deleteUserFav(userFavId)).then(() => {
+        dispatch(fetchUserFavs(userId));
+      });
     } else {
       const userFavObj = {
-        idRecipeFk: id,
         idUserFk: userId,
+        idRecipeFk: id,
       };
-      dispatch(addUserFav(userFavObj));
+      dispatch(addUserFav(userFavObj)).then(() => {
+        dispatch(fetchUserFavs(userId));
+      });
     }
   };
 
-  const [commentText, setCommentText] = useState("");
+  // const [commentText, setCommentText] = useState("");
 
-  const handleCommentSubmit = (e) => {
-    e.preventDefault();
-    const commentObj = {
-      idRecipeFk: id,
-      idUserFk: userId,
-      commentText: commentText,
-    };
-    //need to test this
-    //dispatching the action to add a comment
-    dispatch(addComment(commentObj)).then(() => {
-      // Fetch the updated recipe after adding the comment
-      dispatch(fetchSingleRecipe(id));
-    });
-    setCommentText("");
-  };
+  // const handleCommentSubmit = (e) => {
+  //   e.preventDefault();
+  //   const commentObj = {
+  //     idRecipeFk: id,
+  //     idUserFk: userId,
+  //     commentText: commentText,
+  //   };
+  //   //need to test this
+  //   //dispatching the action to add a comment
+  //   dispatch(addComment(commentObj)).then(() => {
+  //     // Fetch the updated recipe after adding the comment
+  //     dispatch(fetchSingleRecipe(id));
+  //   });
+  //   setCommentText("");
+  // };
 
-  const handleDeleteComment = (commentId) => {
-    dispatch(softDeleteComment(id)).then(() => {
-      // Fetch the updated recipe after deleting the comment
-      dispatch(fetchSingleRecipe(id));
-    });
-  };
+  // const handleDeleteComment = (commentId) => {
+  //   dispatch(softDeleteComment(id)).then(() => {
+  //     // Fetch the updated recipe after deleting the comment
+  //     dispatch(fetchSingleRecipe(id));
+  //   });
+  // };
 
   return (
     <div>
       {recipe ? (
         <div className="container my-5">
           <h1>{recipe.nameRecipe}</h1>
-          <button onClick={handleLike} className="like-button">
+          <span onClick={handleLike} className="like-button text-danger">
             <FontAwesomeIcon icon={userHasLiked ? solidHeart : regularHeart} />
-          </button>
+          </span>
           <h2>Rating:</h2>
 
-          <ReactStars count={5} value={averageRating.averageRating} size={60} isHalf={true} edit={false} />
+          {averageRating.averageRating && (
+            <ReactStars count={5} value={averageRating.averageRating} size={60} isHalf={true} edit={false} />
+          )}
           <h6>N° ratings: {averageRating.numberOfRatings ? averageRating.numberOfRatings : 0}</h6>
 
           <img
@@ -188,55 +202,14 @@ function Recipe() {
 
           <div>
             {userHasRated ? <h2>Update your rating</h2> : <h2>Rate this recipe</h2>}
-            <ReactStars
+            {userRating && <ReactStars
               count={5}
               size={60}
-              value={userHasRated ? userRating.ratingValue / 2 : 0}
+              value={userRating ? userRating.ratingValue / 2 : 0}
               isHalf={true}
               edit={true}
               onChange={(value) => (userHasRated ? updateRatingFunc(value) : newRating(value))}
-            />
-          </div>
-
-          <div>
-            <h2>Comments</h2>
-            <div>
-              <h2>Add a comment</h2>
-              <form onSubmit={handleCommentSubmit}>
-                <textarea
-                  value={commentText}
-                  onChange={(e) => setCommentText(e.target.value)}
-                  placeholder="Write your comment here..."
-                />
-                <button type="submit">Submit</button>
-              </form>
-            </div>
-            <div className="row">
-              {recipe.comments && recipe.comments.length > 0 ? (
-                recipe.comments.map((comment) => {
-                  return (
-                    <div className="col-12 bg-light" key={comment.idComment}>
-                      <div className="row">
-                        <div className="col-4">
-                          <p>{comment.username}</p>
-                          <p>{comment.commentText}</p>
-                          {comment.idUserFk === userId && (
-                            <button onClick={() => handleDeleteComment(comment.id)}>
-                              <FontAwesomeIcon icon={faTrash} />
-                            </button>
-                          )}
-                        </div>
-                        <div className="col-4">
-                          <p>{formatDate(comment.datePosted)}</p>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })
-              ) : (
-                <p>No comments yet</p>
-              )}
-            </div>
+            />}
           </div>
         </div>
       ) : null}

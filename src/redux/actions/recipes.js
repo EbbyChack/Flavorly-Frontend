@@ -25,7 +25,7 @@ export const fetchSingleRecipe = (id) => async (dispatch) => {
     });
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
+
       dispatch(setSingleRecipe(data));
     } else {
       throw new Error("Fetch single recipe failed");
@@ -57,21 +57,19 @@ export const addRecipe = (recipeObj) => async (dispatch) => {
   }
 };
 
-
 //need to test this
 export const addUserFav = (userFavObj) => async (dispatch) => {
   try {
     const response = await fetch(url + "api/userfavs", {
       method: "POST",
       headers: {
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token()}`,
       },
       body: JSON.stringify(userFavObj),
     });
     if (response.ok) {
-      const data = await response.json();
-      console.log(data);
-      dispatch({ type: "ADD_USER_FAV", payload: data });
+      dispatch({ type: "ADD_USER_FAV", payload: userFavObj });
     } else {
       throw new Error("Add user fav failed");
     }
@@ -89,8 +87,6 @@ export const deleteUserFav = (id) => async (dispatch) => {
       },
     });
     if (response.ok) {
-      const data = await response.json();
-      console.log(data);
       dispatch({ type: "DELETE_USER_FAV", payload: id });
     } else {
       throw new Error("Delete user fav failed");
@@ -103,14 +99,14 @@ export const deleteUserFav = (id) => async (dispatch) => {
 export const fetchUserFavs = (id) => async (dispatch) => {
   try {
     const response = await fetch(url + `api/userfavs/${id}`, {
-      method: 'GET',
+      method: "GET",
       headers: {
         Authorization: `Bearer ${token()}`,
       },
     });
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
+
       dispatch(setUserFavs(data));
     } else {
       throw new Error("Fetch user favs failed");
@@ -160,4 +156,4 @@ export const softDeleteComment = (id) => async (dispatch) => {
   } catch (error) {
     console.log(error);
   }
-}
+};

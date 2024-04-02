@@ -11,10 +11,10 @@ function AllRecipes() {
 
   const dispatch = useDispatch();
 
-  useEffect(() => dispatch(fetchAllRecipes()), []);
+  useEffect(() => {dispatch(fetchAllRecipes())}, []);
 
   //need to check this
-  useEffect(() => dispatch(setUserFavs()), []);
+   useEffect(() => {dispatch(setUserFavs())}, []);
 
   const [modalShow, setModalShow] = useState(false);
 
