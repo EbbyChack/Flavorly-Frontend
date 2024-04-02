@@ -140,7 +140,7 @@ export const addComment = (commentObj) => async (dispatch) => {
 
 export const softDeleteComment = (id) => async (dispatch) => {
   try {
-    const response = await fetch(url + `api/comment/${id}`, {
+    const response = await fetch(url + `api/comment/delete/${id}`, {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${token()}`,

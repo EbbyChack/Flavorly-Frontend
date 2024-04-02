@@ -102,30 +102,29 @@ function Recipe() {
     }
   };
 
-  // const [commentText, setCommentText] = useState("");
+  const [commentText, setCommentText] = useState("");
+  const handleCommentSubmit = (e) => {
+    e.preventDefault();
+    const commentObj = {
+      recipeIdFk: id,
+      userIdFk: userId,
+      commentText: commentText,
+    };
+    //need to test this
+    //dispatching the action to add a comment
+    dispatch(addComment(commentObj)).then(() => {
+      // Fetch the updated recipe after adding the comment
+      dispatch(fetchSingleRecipe(id));
+    });
+    setCommentText("");
+  };
 
-  // const handleCommentSubmit = (e) => {
-  //   e.preventDefault();
-  //   const commentObj = {
-  //     idRecipeFk: id,
-  //     idUserFk: userId,
-  //     commentText: commentText,
-  //   };
-  //   //need to test this
-  //   //dispatching the action to add a comment
-  //   dispatch(addComment(commentObj)).then(() => {
-  //     // Fetch the updated recipe after adding the comment
-  //     dispatch(fetchSingleRecipe(id));
-  //   });
-  //   setCommentText("");
-  // };
-
-  // const handleDeleteComment = (commentId) => {
-  //   dispatch(softDeleteComment(id)).then(() => {
-  //     // Fetch the updated recipe after deleting the comment
-  //     dispatch(fetchSingleRecipe(id));
-  //   });
-  // };
+  const handleDeleteComment = (commentId) => {
+    dispatch(softDeleteComment(commentId)).then(() => {
+      // Fetch the updated recipe after deleting the comment
+      dispatch(fetchSingleRecipe(id));
+    });
+  };
 
   return (
     <div>
@@ -202,14 +201,57 @@ function Recipe() {
 
           <div>
             {userHasRated ? <h2>Update your rating</h2> : <h2>Rate this recipe</h2>}
-            {userRating && <ReactStars
-              count={5}
-              size={60}
-              value={userRating ? userRating.ratingValue / 2 : 0}
-              isHalf={true}
-              edit={true}
-              onChange={(value) => (userHasRated ? updateRatingFunc(value) : newRating(value))}
-            />}
+            {userRating && (
+              <ReactStars
+                count={5}
+                size={60}
+                value={userRating ? userRating.ratingValue / 2 : 0}
+                isHalf={true}
+                edit={true}
+                onChange={(value) => (userHasRated ? updateRatingFunc(value) : newRating(value))}
+              />
+            )}
+          </div>
+          <div>
+            <h2>Comments</h2>
+            <div>
+              <h2>Add a comment</h2>
+              <form onSubmit={handleCommentSubmit}>
+                <textarea
+                  value={commentText}
+                  onChange={(e) => setCommentText(e.target.value)}
+                  placeholder="Write your comment here..."
+                />
+                <button type="submit">Submit</button>
+              </form>
+            </div>
+            <div className="row">
+              {recipe.comments && recipe.comments.length > 0 ? (
+                recipe.comments.map((comment) => {
+                  return (
+                    <div className="col-12 bg-light" key={comment.idComment}>
+                      <div className="row">
+                        <div className="col-4">
+                          <p>{comment.username}</p>
+                          <p>{comment.commentText}</p>
+                         
+                          {comment.userIdFk == userId && (
+                            <button onClick={() => handleDeleteComment(comment.idComment)}>
+                              <FontAwesomeIcon icon={faTrash} />
+                            </button>
+                          )}
+                        </div>
+                        <div className="col-4">
+                          <p>{formatDate(comment.datePosted)}</p>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })
+              ) : (
+                <p>No comments yet</p>
+              )}
+            </div>
           </div>
         </div>
       ) : null}
