@@ -3,7 +3,7 @@ import { Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { addRecipe } from "../redux/actions/recipes";
 
-import { Toast } from "bootstrap";
+
 import { ToastContainer, toast } from "react-toastify";
 import ReactSelect from "react-select";
 
@@ -70,6 +70,7 @@ function CreateRecipeForm(props) {
     };
 
     dispatch(addRecipe(recipeObj));
+    props.onHide();
   };
   return (
     <div>

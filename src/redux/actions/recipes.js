@@ -6,7 +6,7 @@ export const fetchAllRecipes = () => async (dispatch) => {
     const response = await fetch(url + "api/recipe");
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
+      
       dispatch(setAllRecipes(data));
     } else {
       throw new Error("Fetch all recipes failed");
@@ -57,7 +57,46 @@ export const addRecipe = (recipeObj) => async (dispatch) => {
   }
 };
 
-//need to test this
+export const editRecipe = (id,recipeObj) => async (dispatch) => {
+  try {
+    const response = await fetch(url + `api/recipe/edit/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token()}`,
+      },
+      body: JSON.stringify(recipeObj),
+    });
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+      dispatch({ type: "EDIT_RECIPE", payload: data });
+    } else {
+      throw new Error("Edit recipe failed");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteRecipe = (id) => async (dispatch) => {
+  try {
+    const response = await fetch(url + `api/recipe/delete/${id}`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token()}`,
+      },
+    });
+    if (response.ok) {
+      dispatch({ type: "DELETE_RECIPE", payload: id });
+    } else {
+      throw new Error("Delete recipe failed");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const addUserFav = (userFavObj) => async (dispatch) => {
   try {
     const response = await fetch(url + "api/userfavs", {

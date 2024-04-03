@@ -14,8 +14,10 @@ import { addNewRating, fetchAverageRating, updateRating } from "../redux/actions
 import ReactStars from "react-rating-stars-component";
 import { jwtDecode as jwt_decode } from "jwt-decode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
+import { faPencil, faTrash, faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
+import EditRecipeForm from "./EditRecipeForm";
+import DeleteModal from "./DeleteModal";
 
 function Recipe() {
   //getting the id from the url
@@ -125,15 +127,27 @@ function Recipe() {
       dispatch(fetchSingleRecipe(id));
     });
   };
+  const [modalShow, setModalShow] = useState(false);
+  const [deleteModalShow, setDeleteModalShow] = useState(false);
 
   return (
     <div>
       {recipe ? (
         <div className="container my-5">
           <h1>{recipe.nameRecipe}</h1>
-          <span onClick={handleLike} className="like-button text-danger">
+          <span onClick={handleLike} className="like-button text-danger m-3">
             <FontAwesomeIcon icon={userHasLiked ? solidHeart : regularHeart} />
           </span>
+
+          <button className="btn btn-dark" onClick={() => setModalShow(true)}>
+            <FontAwesomeIcon icon={faPencil} />
+          </button>
+          <button className="btn btn-dark" onClick={() => setDeleteModalShow(true)} >
+            <FontAwesomeIcon icon={faTrash} />
+          </button>
+          <EditRecipeForm show={modalShow} onHide={() => setModalShow(false)} />
+          <DeleteModal id={id} show={deleteModalShow} onHide={() => setDeleteModalShow(false)} />
+
           <h2>Rating:</h2>
 
           {averageRating.averageRating && (
@@ -234,7 +248,7 @@ function Recipe() {
                         <div className="col-4">
                           <p>{comment.username}</p>
                           <p>{comment.commentText}</p>
-                         
+
                           {comment.userIdFk == userId && (
                             <button onClick={() => handleDeleteComment(comment.idComment)}>
                               <FontAwesomeIcon icon={faTrash} />
