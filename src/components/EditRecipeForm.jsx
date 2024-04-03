@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { addRecipe, editRecipe } from "../redux/actions/recipes";
+import {  editRecipe } from "../redux/actions/recipes";
 
 import { ToastContainer, toast } from "react-toastify";
 import ReactSelect from "react-select";
@@ -118,7 +118,7 @@ function EditRecipeForm(props) {
               <div className="form-group">
                 <label htmlFor="namerecipe">Recipe Name</label>
                 <input
-                  type="text"
+                  type="password"
                   className="form-control"
                   id="namerecipe"
                   placeholder="Enter Recipe Name"

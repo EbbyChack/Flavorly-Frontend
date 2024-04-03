@@ -16,7 +16,7 @@ const recipeSlice = createSlice({
     setSingleRecipe(state, action) {
       state.singleRecipe = action.payload;
     },
-    //need to test this
+    
     setUserFavs(state, action) {
       state.userFavs = action.payload;
     }

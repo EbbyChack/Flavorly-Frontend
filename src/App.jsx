@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Register from "./components/Register";
 import AllRecipes from "./components/AllRecipes";
 import Recipe from "./components/Recipe";
+import UserProfile from "./components/UserProfile";
 
 function App() {
   return (
@@ -13,9 +14,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<LoginForm />} />
-          <Route path="/register" element={<Register/>} />
-          <Route path="/allrecipes" element={<AllRecipes/>} />
-          <Route path="/recipe/:id" element={<Recipe/>} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/allrecipes" element={<AllRecipes />} />
+          <Route path="/recipe/:id" element={<Recipe />} />
+          <Route path="/profile" element={<UserProfile />} />
           <Route path="*" element={<h1>Not Found</h1>} />
         </Routes>
       </BrowserRouter>
