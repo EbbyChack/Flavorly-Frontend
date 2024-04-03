@@ -17,6 +17,7 @@ const authSlice = createSlice({
         },
         logout(state) {
             state.loggedProfile = null;
+            localStorage.removeItem("loggedProfile");
         },
         
     },

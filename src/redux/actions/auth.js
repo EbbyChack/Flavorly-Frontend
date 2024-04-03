@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 import { url } from "../../utils/utils";
-import { login } from "../reducers/authReducer";
+import { login, logout } from "../reducers/authReducer";
 
 export const fetchLogin = (path, loginObj) => async (dispatch) => {
   try {
@@ -26,6 +26,16 @@ export const fetchLogin = (path, loginObj) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const fetchLogout = () => async (dispatch) => {
+  try {
+    dispatch(logout());
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
 
 export const fetchRegister = (path, registerObj) => async (dispatch) => {
   try {
