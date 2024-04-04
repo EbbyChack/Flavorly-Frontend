@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { fetchLogin } from "../redux/actions/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
 function LoginForm() {
@@ -9,6 +9,7 @@ function LoginForm() {
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,12 +19,13 @@ function LoginForm() {
       password,
     };
     dispatch(fetchLogin("api/Auth/login", loginObj));
+    navigate("/");
   };
   return (
     <div className="container my-5">
       <ToastContainer />
       <div className="row justify-content-center">
-        <div className="col-4">
+        <div className="col-8 col-md-4">
           <h1>Login</h1>
           <form onSubmit={handleSubmit}>
             <div className="form-group">

@@ -1,1 +1,73 @@
+/* navbar */
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+.customNav {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e9ecef;
+  box-shadow: 0px 3px 30px 1px rgba(0, 0, 0, 0.1);
+  font-family: "Raleway", sans-serif;
+  font-weight: 700;
+  font-size: 1.19rem;
+  z-index: 100;
+}
 
+.customNav a {
+  color: black !important;
+}
+
+.customNav .navbar-toggler {
+  border: none;
+}
+.customNav .navbar-toggler:focus {
+  box-shadow: none;
+}
+
+@media (max-width: 991px) {
+  .navbar-collapse {
+    position: fixed;
+    top: 7.5em;
+    padding-left: 0px;
+    padding-bottom: 15px;
+    width: 100%;
+    background: #ffffff;
+    max-width: 320px;
+    height: 100vh;
+    overflow-y: auto;
+    border-radius: 10px;
+
+    background-image: url("../src/assets/img/wood.jpeg");
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 5;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  }
+
+  .navbar-collapse.collapsing {
+    height: 100%;
+    transition: left 1s cubic-bezier(0.47, 1.64, 0.41, 0.8);
+    left: -100%;
+  }
+
+  .navbar-collapse.show {
+    height: 100%;
+    left: 5px;
+    transition: left 0.8s cubic-bezier(0.47, 1.64, 0.41, 0.8);
+  }
+
+  .navbar-collapse .nav-link {
+    text-align: center;
+    background-color: #ffffff1e;
+    backdrop-filter: blur(3px);
+    width: max-content;
+    margin: 9px 70px 0 70px;
+    padding: 1px 20px;
+    border-radius: 10em;
+    border: 1px solid #e7e7e7c3;
+  }
+
+  .navbar-collapse .menuStyle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

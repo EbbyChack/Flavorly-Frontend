@@ -5,7 +5,7 @@ import { formatDateNoTime } from "../utils/utils";
 import { formatDate } from "../utils/utils";
 import ReactStars from "react-rating-stars-component";
 import { fetchAllRecipes, fetchUserFavs } from "../redux/actions/recipes";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { jwtDecode as jwt_decode } from "jwt-decode";
 import ChangePassword from "./ChangePassword";
 import { Toast } from "bootstrap";
@@ -14,16 +14,24 @@ import { ToastContainer } from "react-toastify";
 function UserProfile() {
   const dispatch = useDispatch();
 
+  //getting the userid from the token using jwt-decode
   const token = useSelector((state) => state.auth.loggedProfile);
-  const decodedToken = jwt_decode(token);
-  const pathway = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier";
-  const userId = decodedToken[pathway];
+
+  let userId = "";
+
+  if (token) {
+    const decodedToken = jwt_decode(token);
+    const pathway = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier";
+    userId = decodedToken[pathway];
+  }
 
   useEffect(() => {
     dispatch(fetchUserInfo());
     dispatch(fetchAllRecipes());
-    dispatch(fetchUserFavs(userId));
-  }, []);
+    if (userId) {
+      dispatch(fetchUserFavs(userId));
+    }
+  }, [token, userId]);
 
   const userInfo = useSelector((state) => state.user.userInfo);
   const recipes = useSelector((state) => state.recipes.recipes);

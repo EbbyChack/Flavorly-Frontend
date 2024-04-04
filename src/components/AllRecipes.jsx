@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllRecipes } from "../redux/actions/recipes";
-import { Link } from "react-router-dom";
-import { Button } from "bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 import CreateRecipeForm from "./CreateRecipeForm";
 import { setUserFavs } from "../redux/reducers/recipeReducer";
 
@@ -11,12 +10,25 @@ function AllRecipes() {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {dispatch(fetchAllRecipes())}, []);
+  useEffect(() => {
+    dispatch(fetchAllRecipes());
+  }, []);
 
-
-   useEffect(() => {dispatch(setUserFavs())}, []);
+  useEffect(() => {
+    dispatch(setUserFavs());
+  }, []);
 
   const [modalShow, setModalShow] = useState(false);
+
+  const isLoggedIn = useSelector((state) => Boolean(state.auth.loggedProfile));
+
+  const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   if (!isLoggedIn) {
+  //     navigate("/login");
+  //   }
+  // }, [isLoggedIn]);
 
   return (
     <div>

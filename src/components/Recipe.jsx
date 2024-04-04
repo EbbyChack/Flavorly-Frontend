@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   addComment,
   addUserFav,
@@ -20,6 +20,15 @@ import EditRecipeForm from "./EditRecipeForm";
 import DeleteModal from "./DeleteModal";
 
 function Recipe() {
+  const isLoggedIn = useSelector((state) => Boolean(state.auth.loggedProfile));
+  const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   if (!isLoggedIn) {
+  //     navigate("/login");
+  //   }
+  // }, [isLoggedIn]);
+
   //getting the id from the url
   const { id } = useParams();
 
@@ -37,9 +46,14 @@ function Recipe() {
 
   //getting the userid from the token using jwt-decode
   const token = useSelector((state) => state.auth.loggedProfile);
-  const decodedToken = jwt_decode(token);
-  const pathway = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier";
-  const userId = decodedToken[pathway];
+
+  let userId = "";
+
+  if (token) {
+    const decodedToken = jwt_decode(token);
+    const pathway = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier";
+    userId = decodedToken[pathway];
+  }
 
   const dispatch = useDispatch();
 
@@ -142,7 +156,7 @@ function Recipe() {
           <button className="btn btn-dark" onClick={() => setModalShow(true)}>
             <FontAwesomeIcon icon={faPencil} />
           </button>
-          <button className="btn btn-dark" onClick={() => setDeleteModalShow(true)} >
+          <button className="btn btn-dark" onClick={() => setDeleteModalShow(true)}>
             <FontAwesomeIcon icon={faTrash} />
           </button>
           <EditRecipeForm show={modalShow} onHide={() => setModalShow(false)} />
