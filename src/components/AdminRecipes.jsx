@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import CreateRecipeForm from "./CreateRecipeForm";
 import { setUserFavs } from "../redux/reducers/recipeReducer";
 
-function AllRecipes() {
+function AdminRecipes() {
   const recipes = useSelector((state) => state.recipes) || { recipes: [] };
 
   const dispatch = useDispatch();
@@ -18,17 +18,17 @@ function AllRecipes() {
     dispatch(setUserFavs());
   }, []);
 
-  // const [modalShow, setModalShow] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
 
   return (
     <div>
       <div className="container my-5">
-        {/* <CreateRecipeForm show={modalShow} onHide={() => setModalShow(false)} /> */}
+        <CreateRecipeForm show={modalShow} onHide={() => setModalShow(false)} />
         <div className="d-flex justify-content-between align-items-center">
           <h1>All recipes</h1>
-          {/* <button className="btn btn-dark" onClick={() => setModalShow(true)}>
+          <button className="btn btn-dark" onClick={() => setModalShow(true)}>
             Add recipe
-          </button> */}
+          </button>
         </div>
 
         <div className="row">
@@ -46,7 +46,7 @@ function AllRecipes() {
                     <div className="card-body">
                       <h5 className="card-title">{recipe.nameRecipe}</h5>
                       <p className="card-text">{recipe.description}</p>
-                      <Link to={`/recipe/${recipe.idRecipe}`} className="btn btn-dark">
+                      <Link to={`/adminrecipe/${recipe.idRecipe}`} className="btn btn-dark">
                         View recipe
                       </Link>
                     </div>
@@ -60,4 +60,4 @@ function AllRecipes() {
   );
 }
 
-export default AllRecipes;
+export default AdminRecipes;

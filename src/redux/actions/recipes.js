@@ -1,5 +1,5 @@
 import { token, url } from "../../utils/utils";
-import { setAllRecipes, setSingleRecipe, setUserFavs } from "../reducers/recipeReducer";
+import { setAllRecipes, setSingleRecipe, setUserFavs, clearSingleRecipe, setTopRecipes } from "../reducers/recipeReducer";
 
 export const fetchAllRecipes = () => async (dispatch) => {
   try {
@@ -34,6 +34,7 @@ export const fetchSingleRecipe = (id) => async (dispatch) => {
     console.log(error);
   }
 };
+
 
 export const addRecipe = (recipeObj) => async (dispatch) => {
   try {
@@ -96,6 +97,22 @@ export const deleteRecipe = (id) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const fetchTopRecipes = () => async (dispatch) => {
+  try {
+    const response = await fetch(url + "api/recipe/top");
+    if (response.ok) {
+      const data = await response.json();
+      dispatch(setTopRecipes(data));
+    } else {
+      throw new Error("Fetch top recipes failed");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
 
 export const addUserFav = (userFavObj) => async (dispatch) => {
   try {

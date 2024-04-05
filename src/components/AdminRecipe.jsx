@@ -21,7 +21,7 @@ import DeleteModal from "./DeleteModal";
 import { clearSingleRecipe } from "../redux/reducers/recipeReducer";
 import { clearAverageRating } from "../redux/reducers/ratingsReducer";
 
-function Recipe() {
+function AdminRecipe() {
   //getting the id from the url
   const { id } = useParams();
 
@@ -151,14 +151,14 @@ function Recipe() {
             <FontAwesomeIcon icon={userHasLiked ? solidHeart : regularHeart} />
           </span>
 
-          {/* <button className="btn btn-dark" onClick={() => setModalShow(true)}>
+          <button className="btn btn-dark" onClick={() => setModalShow(true)}>
             <FontAwesomeIcon icon={faPencil} />
           </button>
           <button className="btn btn-dark" onClick={() => setDeleteModalShow(true)}>
             <FontAwesomeIcon icon={faTrash} />
           </button>
           <EditRecipeForm show={modalShow} onHide={() => setModalShow(false)} />
-          <DeleteModal id={id} show={deleteModalShow} onHide={() => setDeleteModalShow(false)} /> */}
+          <DeleteModal id={id} show={deleteModalShow} onHide={() => setDeleteModalShow(false)} />
 
           <h2>Rating:</h2>
 
@@ -287,4 +287,4 @@ function Recipe() {
   );
 }
 
-export default Recipe;
+export default AdminRecipe;

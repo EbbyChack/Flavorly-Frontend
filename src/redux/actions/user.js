@@ -2,9 +2,9 @@ import { toast } from "react-toastify";
 import { token, url } from "../../utils/utils";
 import { setUserInfo } from "../reducers/userReducer";
 
-export const fetchUserInfo = () => async (dispatch) => {
+export const fetchUserInfo = (id) => async (dispatch) => {
   try {
-    const response = await fetch(url + "api/usersettings", {
+    const response = await fetch(url + `api/usersettings/${id}`, {
       headers: {
         Authorization: `Bearer ${token()}`,
       },
@@ -20,9 +20,9 @@ export const fetchUserInfo = () => async (dispatch) => {
   }
 };
 
-export const changePassword = (passwordObj) => async (dispatch) => {
+export const changePassword = (id, passwordObj) => async (dispatch) => {
   try {
-    const response = await fetch(url + "api/usersettings/updatepassword", {
+    const response = await fetch(url + `api/usersettings/updatepassword/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

@@ -7,7 +7,7 @@ const PrivateRoute = () => {
   
   const isLoggedIn = useSelector((state) => Boolean(state.auth.loggedProfile));
 
-  console.log(isLoggedIn);
+
 
   function MountedComponent() {
     return LoginForm(true);

@@ -5,10 +5,10 @@ import { formatDateNoTime } from "../utils/utils";
 import { formatDate } from "../utils/utils";
 import ReactStars from "react-rating-stars-component";
 import { fetchAllRecipes, fetchUserFavs } from "../redux/actions/recipes";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { jwtDecode as jwt_decode } from "jwt-decode";
 import ChangePassword from "./ChangePassword";
-import { Toast } from "bootstrap";
+
 import { ToastContainer } from "react-toastify";
 
 function UserProfile() {
@@ -25,13 +25,14 @@ function UserProfile() {
     userId = decodedToken[pathway];
   }
 
+  dispatch(fetchUserInfo(userId));
+
   useEffect(() => {
-    dispatch(fetchUserInfo());
     dispatch(fetchAllRecipes());
     if (userId) {
       dispatch(fetchUserFavs(userId));
     }
-  }, [token, userId]);
+  }, [userId]);
 
   const userInfo = useSelector((state) => state.user.userInfo);
   const recipes = useSelector((state) => state.recipes.recipes);
@@ -79,7 +80,14 @@ function UserProfile() {
                   recipe && (
                     <div key={rating.idRating}>
                       <Link to={`/recipe/${recipe.idRecipe}`}>{recipe.nameRecipe}</Link>
-                      <ReactStars count={5} size={30} value={rating.ratingValue / 2} isHalf={true} edit={false} />
+                      <ReactStars
+                        count={5}
+                        size={30}
+                        value={rating.ratingValue / 2}
+                        isHalf={true}
+                        edit={false}
+                        char="✪"
+                      />
                     </div>
                   )
                 );

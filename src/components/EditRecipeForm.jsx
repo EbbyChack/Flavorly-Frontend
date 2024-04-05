@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import {  editRecipe } from "../redux/actions/recipes";
+import { editRecipe } from "../redux/actions/recipes";
 
 import { ToastContainer, toast } from "react-toastify";
 import ReactSelect from "react-select";
@@ -99,9 +99,13 @@ function EditRecipeForm(props) {
       recipeCategoriesIds: categoriesValues,
     };
 
-
     dispatch(editRecipe(singleRecipe.idRecipe, recipeObj));
     props.onHide();
+    toast.success("Recipe edited successfully");
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
   };
 
   return (
@@ -118,7 +122,7 @@ function EditRecipeForm(props) {
               <div className="form-group">
                 <label htmlFor="namerecipe">Recipe Name</label>
                 <input
-                  type="password"
+                  type="text"
                   className="form-control"
                   id="namerecipe"
                   placeholder="Enter Recipe Name"

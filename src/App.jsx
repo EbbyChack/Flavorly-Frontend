@@ -8,6 +8,9 @@ import Recipe from "./components/Recipe";
 import UserProfile from "./components/UserProfile";
 import PrivateRoute from "./components/PrivateRoute";
 import MyNavbar from "./components/MyNavbar";
+import AdminRecipes from "./components/AdminRecipes";
+import PrivateAdminRoute from "./components/PrivateAdminRoute";
+import AdminRecipe from "./components/AdminRecipe";
 
 function App() {
   return (
@@ -27,6 +30,13 @@ function App() {
           </Route>
           <Route path="/allrecipes" element={PrivateRoute()}>
             <Route path="" element={<AllRecipes />} />
+          </Route>
+          {/* admin */}
+          <Route path="/adminRecipes" element={PrivateAdminRoute()}>
+            <Route path="" element={<AdminRecipes />} />
+          </Route>
+          <Route path="/adminRecipe/:id" element={PrivateAdminRoute()}>
+            <Route path="" element={<AdminRecipe />} />
           </Route>
 
           <Route path="*" element={<h1>Not Found</h1>} />

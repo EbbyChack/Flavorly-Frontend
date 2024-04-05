@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { changePassword } from "../redux/actions/user";
 import { Modal } from "react-bootstrap";
 import { toast } from "react-toastify";
+import { jwtDecode as jwt_decode } from "jwt-decode";
+
 
 function ChangePassword(props) {
   const [oldpassword, setOldPassword] = useState("");
@@ -10,6 +12,17 @@ function ChangePassword(props) {
   const [confirmpassword, setConfirmPassword] = useState("");
 
   const dispatch = useDispatch();
+
+  //getting the userid from the token using jwt-decode
+  const token = useSelector((state) => state.auth.loggedProfile);
+
+  let userId = "";
+
+  if (token) {
+    const decodedToken = jwt_decode(token);
+    const pathway = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier";
+    userId = decodedToken[pathway];
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,7 +35,7 @@ function ChangePassword(props) {
       oldpassword: oldpassword,
       newpassword: newpassword,
     };
-    dispatch(changePassword(passwordObj));
+    dispatch(changePassword(userId, passwordObj));
     setOldPassword("");
     setNewPassword("");
     setConfirmPassword("");

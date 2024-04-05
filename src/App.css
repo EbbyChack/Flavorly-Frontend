@@ -21,6 +21,8 @@
   box-shadow: none;
 }
 
+
+
 @media (max-width: 991px) {
   .navbar-collapse {
     position: fixed;
@@ -69,5 +71,37 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+}
+.bentoImg {
+  height: 40vh;
+  width: 100%;
+  object-fit: cover;
+}
+
+.scrollable-row {
+  white-space: nowrap;
+  height: 60dvh;
+  z-index: 0;
+  border: 1px solid #e7e7e7c3;
+  animation: slide 60s linear infinite;
+}
+
+@media (max-width: 991px) {
+  .scrollable-row {
+    height: 45vh;
+  }
+}
+.colBento {
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateY(-100%);
   }
 }

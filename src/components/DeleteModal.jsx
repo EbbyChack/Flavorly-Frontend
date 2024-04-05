@@ -1,15 +1,24 @@
 import React from "react";
 import { Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import { deleteRecipe } from "../redux/actions/recipes";
+import { redirect, useNavigate } from "react-router-dom";
 
 function DeleteModal(props) {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     
     const handleDelete = (id) => {
         dispatch(deleteRecipe(id));
+        toast.success("Recipe deleted successfully");
         props.onHide();
+
+        setTimeout(() => {
+            navigate("/allrecipes");
+        }, 1000);
+        
+       
     }
     
 

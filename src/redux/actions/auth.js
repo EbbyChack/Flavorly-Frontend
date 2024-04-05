@@ -1,6 +1,7 @@
 import { toast } from "react-toastify";
 import { url } from "../../utils/utils";
 import { login, logout } from "../reducers/authReducer";
+import { clearUserInfo } from "../reducers/userReducer";
 
 export const fetchLogin = (path, loginObj) => async (dispatch) => {
   try {
@@ -22,7 +23,6 @@ export const fetchLogin = (path, loginObj) => async (dispatch) => {
       throw new Error("Login failed");
     }
   } catch (error) {
-   
     console.log(error);
   }
 };
@@ -30,12 +30,11 @@ export const fetchLogin = (path, loginObj) => async (dispatch) => {
 export const fetchLogout = () => async (dispatch) => {
   try {
     dispatch(logout());
+    dispatch(clearUserInfo());
   } catch (error) {
     console.log(error);
   }
-}
-
-
+};
 
 export const fetchRegister = (path, registerObj) => async (dispatch) => {
   try {
