@@ -6,6 +6,9 @@ import { fetchIngredientsAndCategories } from "../redux/actions/ingAndCat";
 import { ToastContainer, toast } from "react-toastify";
 import { fetchTopRecipes } from "../redux/actions/recipes";
 import BentoGrid from "./BentoGrid";
+import Pippo from "./Pippo";
+
+
 
 function Home() {
   const dispatch = useDispatch();
@@ -21,6 +24,7 @@ function Home() {
       <ToastContainer />
       <h1>Welcome to Flavorly</h1>
       <BentoGrid recipes={topRecipes} />
+     
     </div>
   );
 }

@@ -36,17 +36,17 @@ function MyNavbar() {
   }
 
   return (
-    <div>
-      <Navbar expand="lg" className="customNav">
+    <div className="position-sticky top-0 z-3">
+      <Navbar expand="lg" className="customNav ">
         <Container className="d-flex align-items-center">
-          <Navbar.Brand href="#home">
+        <Link to="/" className=" navbar-brand">
             <img
               src={Flavorly}
               className="d-inline-block align-top "
               alt="React Bootstrap logo"
               style={{ width: "10em" }}
             />
-          </Navbar.Brand>
+          </Link>
           <Navbar.Toggle aria-controls="navbarNav" />
           <Navbar.Collapse id="navbarNav">
             <Nav className="ms-auto menuStyle">

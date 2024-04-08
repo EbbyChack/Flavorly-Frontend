@@ -16,8 +16,7 @@ import { jwtDecode as jwt_decode } from "jwt-decode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil, faTrash, faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
-import EditRecipeForm from "./EditRecipeForm";
-import DeleteModal from "./DeleteModal";
+
 import { clearSingleRecipe } from "../redux/reducers/recipeReducer";
 import { clearAverageRating } from "../redux/reducers/ratingsReducer";
 

@@ -21,8 +21,6 @@
   box-shadow: none;
 }
 
-
-
 @media (max-width: 991px) {
   .navbar-collapse {
     position: fixed;
@@ -104,4 +102,267 @@
   100% {
     transform: translateY(-100%);
   }
+}
+
+
+/* background */
+
+.allRecipesBackground{
+  background-image: url("../src/assets/img/marble.jpg");
+  background-repeat: repeat-y;
+  background-position: center;
+  background-size: 100% auto;
+  background-size: cover;
+  
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+}
+
+/* cards */
+
+.CustomCard {
+  overflow: visible;
+  width: 100%;
+  height: 26em;
+}
+
+.CustomCard-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  border-radius: 5px;
+}
+
+.content {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 300ms;
+  box-shadow: 1px 2px 10px 0px #0000008f;
+  border-radius: 5px;
+}
+
+.front,
+.back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.back {
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.back-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #151515;
+  border-radius: 5px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.back-content-text {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.CustomCard:hover .content {
+  transform: rotateY(180deg);
+}
+
+@keyframes rotation_481 {
+  0% {
+    transform: rotateZ(0deg);
+  }
+
+  0% {
+    transform: rotateZ(360deg);
+  }
+}
+
+.front {
+  transform: rotateY(180deg);
+  color: white;
+}
+
+.front .front-content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.CustomCard-img-front {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+  background-color: #00000055;
+  filter: blur(6px);
+
+}
+
+.badge {
+  background-color: #00000055;
+  padding: 2px 10px;
+  border-radius: 10px;
+  backdrop-filter: blur(2px);
+  width: fit-content;
+}
+
+.description {
+  box-shadow: 0px 0px 10px 2px #00000080;
+  width: 100%;
+  padding: 10px;
+  background-color: #706d608e;
+  backdrop-filter: blur(3px);
+  border-radius: 5px;
+}
+
+.title {
+  font-size: 1.1em;
+  max-width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-subtitle {
+
+  font-size: 0.8em;
+  font-weight: 700;
+  
+
+  border-radius: 10px;
+ 
+  width: fit-content;
+}
+
+.card-footer {
+  color: #ffffff88;
+  margin-top: 5px;
+  font-size: 0.7em;
+}
+
+/* button */
+.special-button button {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+  border: 0;
+  vertical-align: middle;
+  text-decoration: none;
+  background: transparent;
+  padding: 0;
+  font-size: inherit;
+  font-family: inherit;
+
+ }
+ 
+ .special-button button.view-recipe {
+  width: 12rem;
+  height: auto;
+ }
+ 
+ .special-button button.view-recipe .circle {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  position: relative;
+  display: block;
+  margin: 0;
+  width: 3rem;
+  height: 3rem;
+  background: #00000070;
+  border-radius: 1.625rem;
+ }
+ 
+ .special-button button.view-recipe .circle .icon {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  background: #fff;
+ }
+ 
+ .special-button button.view-recipe .circle .icon.arrow {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  left: 0.625rem;
+  width: 1.125rem;
+  height: 0.125rem;
+  background: none;
+ }
+ 
+ .special-button button.view-recipe .circle .icon.arrow::before {
+  position: absolute;
+  content: "";
+  top: -0.29rem;
+  right: 0.0625rem;
+  width: 0.625rem;
+  height: 0.625rem;
+  border-top: 0.125rem solid #fff;
+  border-right: 0.125rem solid #fff;
+  transform: rotate(45deg);
+ }
+ 
+ .special-button button.view-recipe .button-text {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.75rem 0;
+  margin: 0 0 0 1.85rem;
+  color: #ffffff;
+  font-weight: 700;
+  line-height: 1.6;
+  text-align: center;
+  text-transform: uppercase;
+ }
+ 
+ .special-button button:hover .circle {
+  width: 100%;
+ }
+ 
+ .special-button button:hover .circle .icon.arrow {
+  background: #fff;
+  transform: translate(1rem, 0);
+ }
+ 
+ .special-button  button:hover .button-text {
+  color: #fff;
+ }
+
+ .heartIcon{
+  color: #24BB59;
+  font-size: 1em;
+  
+  z-index: 100;
 }
