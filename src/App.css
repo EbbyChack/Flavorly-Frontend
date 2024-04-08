@@ -1,5 +1,6 @@
 /* navbar */
 @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+
 .customNav {
   background-color: #ffffff;
   border-bottom: 1px solid #e9ecef;
@@ -81,7 +82,6 @@
   white-space: nowrap;
   height: 60dvh;
   z-index: 0;
-  border: 1px solid #e7e7e7c3;
   animation: slide 60s linear infinite;
 }
 
@@ -104,26 +104,29 @@
   }
 }
 
-
 /* background */
 
-.allRecipesBackground{
+.allRecipesBackground {
   background-image: url("../src/assets/img/marble.jpg");
   background-repeat: repeat-y;
   background-position: center;
   background-size: 100% auto;
   background-size: cover;
-  
-  
+
   display: flex;
   justify-content: center;
   align-items: center;
- 
 }
 
 /* cards */
 
 .CustomCard {
+  overflow: visible;
+  width: 100%;
+  height: 26em;
+}
+
+.BentoCustomCard {
   overflow: visible;
   width: 100%;
   height: 26em;
@@ -191,7 +194,14 @@
   align-items: flex-start;
 }
 
-.CustomCard:hover .content {
+.BentoCustomCard .back-content-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+
+.CustomCard:hover .content,
+.BentoCustomCard:hover .content {
   transform: rotateY(180deg);
 }
 
@@ -226,7 +236,6 @@
   border-radius: 5px;
   background-color: #00000055;
   filter: blur(6px);
-
 }
 
 .badge {
@@ -254,13 +263,11 @@
 }
 
 .card-subtitle {
-
   font-size: 0.8em;
   font-weight: 700;
-  
 
   border-radius: 10px;
- 
+
   width: fit-content;
 }
 
@@ -283,15 +290,14 @@
   padding: 0;
   font-size: inherit;
   font-family: inherit;
+}
 
- }
- 
- .special-button button.view-recipe {
+.special-button button.view-recipe {
   width: 12rem;
   height: auto;
- }
- 
- .special-button button.view-recipe .circle {
+}
+
+.special-button button.view-recipe .circle {
   transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
   position: relative;
   display: block;
@@ -300,26 +306,26 @@
   height: 3rem;
   background: #00000070;
   border-radius: 1.625rem;
- }
- 
- .special-button button.view-recipe .circle .icon {
+}
+
+.special-button button.view-recipe .circle .icon {
   transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
   position: absolute;
   top: 0;
   bottom: 0;
   margin: auto;
   background: #fff;
- }
- 
- .special-button button.view-recipe .circle .icon.arrow {
+}
+
+.special-button button.view-recipe .circle .icon.arrow {
   transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
   left: 0.625rem;
   width: 1.125rem;
   height: 0.125rem;
   background: none;
- }
- 
- .special-button button.view-recipe .circle .icon.arrow::before {
+}
+
+.special-button button.view-recipe .circle .icon.arrow::before {
   position: absolute;
   content: "";
   top: -0.29rem;
@@ -329,9 +335,9 @@
   border-top: 0.125rem solid #fff;
   border-right: 0.125rem solid #fff;
   transform: rotate(45deg);
- }
- 
- .special-button button.view-recipe .button-text {
+}
+
+.special-button button.view-recipe .button-text {
   transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
   position: absolute;
   top: 0;
@@ -345,24 +351,68 @@
   line-height: 1.6;
   text-align: center;
   text-transform: uppercase;
- }
- 
- .special-button button:hover .circle {
+}
+
+.special-button button:hover .circle {
   width: 100%;
- }
- 
- .special-button button:hover .circle .icon.arrow {
+}
+
+.special-button button:hover .circle .icon.arrow {
   background: #fff;
   transform: translate(1rem, 0);
- }
- 
- .special-button  button:hover .button-text {
-  color: #fff;
- }
+}
 
- .heartIcon{
-  color: #24BB59;
+.special-button button:hover .button-text {
+  color: #fff;
+}
+
+.heartIcon {
+  color: #24bb59;
   font-size: 1em;
-  
+
   z-index: 100;
 }
+
+.topHomeBanner {
+  background: linear-gradient(
+    90deg,
+    rgba(201, 170, 48, 1) 0%,
+    rgba(204, 174, 52, 1) 15%,
+    rgba(223, 200, 110, 1) 30%,
+    rgba(255, 216, 60, 1) 50%,
+    rgba(212, 183, 71, 1) 67%,
+    rgba(182, 154, 45, 1) 80%,
+    rgba(170, 157, 106, 1) 100%
+  );
+
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: darken;
+
+  border-radius: 5px;
+
+  color: white;
+  margin-top: 2em;
+  margin-bottom: 3em;
+  padding: 8em 2em;
+}
+
+.react-multiple-carousel__arrow   {
+  position: absolute;
+  font-size: 2em;
+  color: rgb(209, 21, 21);
+  border: none;
+  background: rgba(245, 0, 0, 0.438);
+  padding: 0.5em 0.2em;
+  border-radius: 0%;
+}
+
+.react-multiple-carousel__arrow--left {
+  left: 0 !important;
+}
+
+.react-multiple-carousel__arrow--right {
+  right: 0 !important;
+}
+
+
