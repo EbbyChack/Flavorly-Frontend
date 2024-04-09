@@ -81,10 +81,8 @@ function EditRecipeForm(props) {
       return;
     }
 
-    // const ingredientsValues = ingredientsid.map((item) => item.value);
-    // const categoriesValues = categoriesid.map((item) => item.value);
-
-   
+     const ingredientsValues = ingredientsid.map((item) => item.value);
+     const categoriesValues = categoriesid.map((item) => item.value);
 
     const recipeObj = {
       namerecipe,
@@ -97,18 +95,18 @@ function EditRecipeForm(props) {
       img2,
       img3,
       videourl,
-      recipeIngredientsIds: ingredientsid,
-      recipeCategoriesIds: categoriesid,
+      recipeIngredientsIds: ingredientsValues,
+      recipeCategoriesIds: categoriesValues,
     };
 
-     dispatch(editRecipe(singleRecipe.idRecipe, recipeObj));
+    dispatch(editRecipe(singleRecipe.idRecipe, recipeObj));
     console.log("recipeObj", recipeObj);
     props.onHide();
     toast.success("Recipe edited successfully");
 
-     setTimeout(() => {
-       window.location.reload();
-     }, 1000);
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
   };
 
   return (
@@ -249,7 +247,7 @@ function EditRecipeForm(props) {
                   //   defaultValue={ingredientsOptions.filter((option) =>
                   //     singleRecipe.recipeIngredients.some((ingredient) => ingredient.idIngredientFk === option.value)
                   //   )}
-                  onChange={(selected) => setIngredientsid(selected.map((item) => item.value))}
+                  onChange={(selected) => setIngredientsid(selected.map((item) => item))}
                 />
               </div>
 
@@ -262,7 +260,7 @@ function EditRecipeForm(props) {
                   //   defaultValue={categoriesOptions.filter((option) =>
                   //     singleRecipe.recipeCategories.some((category) => category.idCategoryFk === option.value)
                   //   )}
-                  onChange={(selected) => setCategoriesid(selected.map((item) => item.value))}
+                  onChange={(selected) => setCategoriesid(selected.map((item) => item))}
                 />
               </div>
 

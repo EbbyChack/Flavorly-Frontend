@@ -83,6 +83,7 @@
   height: 60dvh;
   z-index: 0;
   animation: slide 60s linear infinite;
+  
 }
 
 @media (max-width: 991px) {

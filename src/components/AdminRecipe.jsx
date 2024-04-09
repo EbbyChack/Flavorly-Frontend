@@ -147,9 +147,7 @@ function AdminRecipe() {
       {recipe ? (
         <div className="container my-5">
           <h1>{recipe.nameRecipe}</h1>
-          <span onClick={handleLike} className="like-button text-danger m-3">
-            <FontAwesomeIcon icon={userHasLiked ? solidHeart : regularHeart} />
-          </span>
+          
 
           <button className="btn btn-dark" onClick={() => setModalShow(true)}>
             <FontAwesomeIcon icon={faPencil} />
@@ -160,12 +158,9 @@ function AdminRecipe() {
           <EditRecipeForm show={modalShow} onHide={() => setModalShow(false)} />
           <DeleteModal id={id} show={deleteModalShow} onHide={() => setDeleteModalShow(false)} />
 
-          <h2>Rating:</h2>
+          
 
-          {averageRating.averageRating && (
-            <ReactStars count={5} value={averageRating.averageRating} size={60} isHalf={true} edit={false} char="✪" />
-          )}
-          <h6>N° ratings: {averageRating.numberOfRatings ? averageRating.numberOfRatings : 0}</h6>
+         
 
           <img
             src={recipe.mainImg}
@@ -225,62 +220,9 @@ function AdminRecipe() {
           <p>{recipe.instructions}</p>
           <iframe width="100%" height="515" src={recipe.videoUrl}></iframe>
 
-          <div>
-            {userHasRated ? <h2>Update your rating</h2> : <h2>Rate this recipe</h2>}
-            {userRating && (
-              <ReactStars
-                count={5}
-                size={60}
-                value={userRating ? userRating.ratingValue / 2 : 0}
-                isHalf={true}
-                edit={true}
-                onChange={(value) => (userHasRated ? updateRatingFunc(value) : newRating(value))}
-                char="✪"
-              />
-            )}
-          </div>
+          
 
-          <div>
-            <h2>Comments</h2>
-            <div>
-              <h2>Add a comment</h2>
-              <form onSubmit={handleCommentSubmit}>
-                <textarea
-                  value={commentText}
-                  onChange={(e) => setCommentText(e.target.value)}
-                  placeholder="Write your comment here..."
-                />
-                <button type="submit">Submit</button>
-              </form>
-            </div>
-            <div className="row">
-              {recipe.comments && recipe.comments.length > 0 ? (
-                recipe.comments.map((comment) => {
-                  return (
-                    <div className="col-12 bg-light" key={comment.idComment}>
-                      <div className="row">
-                        <div className="col-4">
-                          <p>{comment.username}</p>
-                          <p>{comment.commentText}</p>
-
-                          {comment.userIdFk == userId && (
-                            <button onClick={() => handleDeleteComment(comment.idComment)}>
-                              <FontAwesomeIcon icon={faTrash} />
-                            </button>
-                          )}
-                        </div>
-                        <div className="col-4">
-                          <p>{formatDate(comment.datePosted)}</p>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })
-              ) : (
-                <p>No comments yet</p>
-              )}
-            </div>
-          </div>
+          
         </div>
       ) : null}
     </div>

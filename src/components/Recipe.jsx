@@ -162,7 +162,7 @@ function Recipe() {
           <h2>Rating:</h2>
 
           {averageRating.averageRating && (
-            <ReactStars count={5} value={averageRating.averageRating} size={60} isHalf={true} edit={false} char="✪" />
+            <ReactStars count={5} value={averageRating.averageRating} size={60} isHalf={true} edit={false}  />
           )}
           <h6>N° ratings: {averageRating.numberOfRatings ? averageRating.numberOfRatings : 0}</h6>
 
@@ -234,7 +234,7 @@ function Recipe() {
                 isHalf={true}
                 edit={true}
                 onChange={(value) => updateRatingFunc(value)}
-                char="✪"
+                
               />
             )}
             {!userHasRated && (
@@ -244,7 +244,7 @@ function Recipe() {
                 isHalf={true}
                 edit={true}
                 onChange={(value) => newRating(value)}
-                char="✪"
+                
               />
             )}
           </div>
