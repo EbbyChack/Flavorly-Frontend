@@ -81,8 +81,10 @@ function EditRecipeForm(props) {
       return;
     }
 
-    const ingredientsValues = ingredientsid.map((item) => item.value);
-    const categoriesValues = categoriesid.map((item) => item.value);
+    // const ingredientsValues = ingredientsid.map((item) => item.value);
+    // const categoriesValues = categoriesid.map((item) => item.value);
+
+   
 
     const recipeObj = {
       namerecipe,
@@ -95,17 +97,18 @@ function EditRecipeForm(props) {
       img2,
       img3,
       videourl,
-      recipeIngredientsIds: ingredientsValues,
-      recipeCategoriesIds: categoriesValues,
+      recipeIngredientsIds: ingredientsid,
+      recipeCategoriesIds: categoriesid,
     };
 
-    dispatch(editRecipe(singleRecipe.idRecipe, recipeObj));
+     dispatch(editRecipe(singleRecipe.idRecipe, recipeObj));
+    console.log("recipeObj", recipeObj);
     props.onHide();
     toast.success("Recipe edited successfully");
 
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
+     setTimeout(() => {
+       window.location.reload();
+     }, 1000);
   };
 
   return (
@@ -242,7 +245,7 @@ function EditRecipeForm(props) {
                 <ReactSelect
                   isMulti
                   options={ingredientsOptions}
-                  value={ingredientsid}
+                  defaultValue={ingredientsid}
                   //   defaultValue={ingredientsOptions.filter((option) =>
                   //     singleRecipe.recipeIngredients.some((ingredient) => ingredient.idIngredientFk === option.value)
                   //   )}
@@ -255,7 +258,7 @@ function EditRecipeForm(props) {
                 <ReactSelect
                   isMulti
                   options={categoriesOptions}
-                  value={categoriesid}
+                  defaultValue={categoriesid}
                   //   defaultValue={categoriesOptions.filter((option) =>
                   //     singleRecipe.recipeCategories.some((category) => category.idCategoryFk === option.value)
                   //   )}
