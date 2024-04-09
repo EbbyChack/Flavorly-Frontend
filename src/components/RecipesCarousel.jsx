@@ -33,8 +33,8 @@ function RecipesCarousel(props) {
     return <button onClick={onClick} {...rest} className="custom-arrow-right"> <FontAwesomeIcon icon={faArrowRight} /></button>;
   };
   return (
-    <div className="CarouselCustom container my-5 ">
-      <h1>{props.title}</h1>
+    <div className="CarouselCustom container  ">
+      <h1 className="headings">━━━<span>{props.title}</span>━━━</h1>
 
       <Carousel
         swipeable={true}

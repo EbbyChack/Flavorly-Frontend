@@ -1,6 +1,24 @@
 /* navbar */
 @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
 
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap");
+
+.headings {
+  font-family: "Dancing Script", cursive;
+  font-size: 0.5em;
+  font-weight: 900;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-block: 4em;
+  background-color: #ffe37252;
+  border-radius: 5px;
+  backdrop-filter: blur(10px);
+}
+.headings span {
+  font-size: clamp(4em, 5vw, 5.8em);
+}
+
 .customNav {
   background-color: #ffffff;
   border-bottom: 1px solid #e9ecef;
@@ -30,7 +48,7 @@
     padding-bottom: 15px;
     width: 100%;
     background: #ffffff;
-    max-width: 320px;
+    max-width: 70vw;
     height: 100vh;
     overflow-y: auto;
     border-radius: 10px;
@@ -83,7 +101,6 @@
   height: 60dvh;
   z-index: 0;
   animation: slide 60s linear infinite;
-  
 }
 
 @media (max-width: 991px) {
@@ -117,6 +134,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.newBg {
+  background-image: url("../src/assets/img/marble.jpg");
+  background-repeat: repeat-y;
+  background-position: center;
+  background-size: cover;
 }
 
 /* cards */
@@ -375,16 +399,7 @@
 }
 
 .topHomeBanner {
-  background: linear-gradient(
-    90deg,
-    rgba(201, 170, 48, 1) 0%,
-    rgba(204, 174, 52, 1) 15%,
-    rgba(223, 200, 110, 1) 30%,
-    rgba(255, 216, 60, 1) 50%,
-    rgba(212, 183, 71, 1) 67%,
-    rgba(182, 154, 45, 1) 80%,
-    rgba(170, 157, 106, 1) 100%
-  );
+  background-color: #eccf5a27;
 
   background-size: cover;
   background-position: center;
@@ -392,13 +407,13 @@
 
   border-radius: 5px;
 
-  color: white;
+  color: rgb(0, 0, 0);
   margin-top: 2em;
   margin-bottom: 3em;
   padding: 8em 2em;
 }
 
-.react-multiple-carousel__arrow   {
+.react-multiple-carousel__arrow {
   position: absolute;
   font-size: 2em;
   color: rgb(209, 21, 21);
@@ -416,5 +431,3 @@
 .react-multiple-carousel__arrow--right {
   right: 0 !important;
 }
-
-
