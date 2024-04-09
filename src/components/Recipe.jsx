@@ -233,7 +233,17 @@ function Recipe() {
                 value={userRating ? userRating.ratingValue / 2 : 0}
                 isHalf={true}
                 edit={true}
-                onChange={(value) => (userHasRated ? updateRatingFunc(value) : newRating(value))}
+                onChange={(value) => updateRatingFunc(value)}
+                char="✪"
+              />
+            )}
+            {!userHasRated && (
+              <ReactStars
+                count={5}
+                size={60}
+                isHalf={true}
+                edit={true}
+                onChange={(value) => newRating(value)}
                 char="✪"
               />
             )}
@@ -241,35 +251,27 @@ function Recipe() {
 
           <div>
             <h2>Comments</h2>
-            <div>
-              <h2>Add a comment</h2>
-              <form onSubmit={handleCommentSubmit}>
-                <textarea
-                  value={commentText}
-                  onChange={(e) => setCommentText(e.target.value)}
-                  placeholder="Write your comment here..."
-                />
-                <button type="submit">Submit</button>
-              </form>
-            </div>
             <div className="row">
               {recipe.comments && recipe.comments.length > 0 ? (
                 recipe.comments.map((comment) => {
                   return (
-                    <div className="col-12 bg-light" key={comment.idComment}>
+                    <div className="col-12 bg-light rounded rounded-2 p-2 mb-2" key={comment.idComment}>
                       <div className="row">
-                        <div className="col-4">
+                        <div className="col-2">
                           <p>{comment.username}</p>
+                        </div>
+                        <div className="col-4">
                           <p>{comment.commentText}</p>
-
+                        </div>
+                        <div className="col-5">
+                          <p>{formatDate(comment.datePosted)}</p>
+                        </div>
+                        <div className="col-1">
                           {comment.userIdFk == userId && (
-                            <button onClick={() => handleDeleteComment(comment.idComment)}>
+                            <button className="btn btn-dark" onClick={() => handleDeleteComment(comment.idComment)}>
                               <FontAwesomeIcon icon={faTrash} />
                             </button>
                           )}
-                        </div>
-                        <div className="col-4">
-                          <p>{formatDate(comment.datePosted)}</p>
                         </div>
                       </div>
                     </div>
@@ -278,6 +280,20 @@ function Recipe() {
               ) : (
                 <p>No comments yet</p>
               )}
+            </div>
+            <div>
+              <h6>Add a comment</h6>
+              <form onSubmit={handleCommentSubmit} className="d-flex">
+                <input
+                  value={commentText}
+                  onChange={(e) => setCommentText(e.target.value)}
+                  placeholder="Write your comment here..."
+                  className="form-control"
+                />
+                <button type="submit" className="btn btn-dark">
+                  Post
+                </button>
+              </form>
             </div>
           </div>
         </div>
