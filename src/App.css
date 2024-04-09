@@ -405,6 +405,7 @@
   background: rgba(245, 0, 0, 0.438);
   padding: 0.5em 0.2em;
   border-radius: 0%;
+  z-index: 1 !important;
 }
 
 .react-multiple-carousel__arrow--left {

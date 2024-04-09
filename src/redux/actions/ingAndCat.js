@@ -1,4 +1,4 @@
-import { token, url } from "../../utils/utils";
+import { url } from "../../utils/utils";
 import { setIngredientsAndCategories } from "../reducers/ingAndCatReducer";
 
 
@@ -6,7 +6,7 @@ export const fetchIngredientsAndCategories = () => async (dispatch) => {
     try {
       const response = await fetch(url + `api/recipe/dropdowns`, {
         headers: {
-          Authorization: `Bearer ${token()}`,
+          contentType: "application/json",
         },
       });
       if (response.ok) {

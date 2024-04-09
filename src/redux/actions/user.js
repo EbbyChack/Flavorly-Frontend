@@ -1,12 +1,13 @@
 import { toast } from "react-toastify";
-import { token, url } from "../../utils/utils";
+import { url } from "../../utils/utils";
 import { setUserInfo } from "../reducers/userReducer";
+import { fetchWithAuth } from "../../utils/interceptor";
 
 export const fetchUserInfo = (id) => async (dispatch) => {
   try {
-    const response = await fetch(url + `api/usersettings/${id}`, {
+    const response = await fetchWithAuth(url + `api/usersettings/${id}`, {
       headers: {
-        Authorization: `Bearer ${token()}`,
+        contentType: "application/json",
       },
     });
     if (response.ok) {
@@ -22,11 +23,10 @@ export const fetchUserInfo = (id) => async (dispatch) => {
 
 export const changePassword = (id, passwordObj) => async (dispatch) => {
   try {
-    const response = await fetch(url + `api/usersettings/updatepassword/${id}`, {
+    const response = await fetchWithAuth(url + `api/usersettings/updatepassword/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token()}`,
       },
       body: JSON.stringify(passwordObj),
     });

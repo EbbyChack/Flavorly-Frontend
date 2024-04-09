@@ -1,12 +1,19 @@
-import { token, url } from "../../utils/utils";
-import { setAllRecipes, setSingleRecipe, setUserFavs, clearSingleRecipe, setTopRecipes } from "../reducers/recipeReducer";
+import { fetchWithAuth } from "../../utils/interceptor";
+import { url } from "../../utils/utils";
+import {
+  setAllRecipes,
+  setSingleRecipe,
+  setUserFavs,
+  clearSingleRecipe,
+  setTopRecipes,
+} from "../reducers/recipeReducer";
 
 export const fetchAllRecipes = () => async (dispatch) => {
   try {
     const response = await fetch(url + "api/recipe");
     if (response.ok) {
       const data = await response.json();
-      
+
       dispatch(setAllRecipes(data));
     } else {
       throw new Error("Fetch all recipes failed");
@@ -18,9 +25,9 @@ export const fetchAllRecipes = () => async (dispatch) => {
 
 export const fetchSingleRecipe = (id) => async (dispatch) => {
   try {
-    const response = await fetch(url + `api/recipe/${id}`, {
+    const response = await fetchWithAuth(url + `api/recipe/${id}`, {
       headers: {
-        Authorization: `Bearer ${token()}`,
+        contentType: "application/json",
       },
     });
     if (response.ok) {
@@ -35,14 +42,12 @@ export const fetchSingleRecipe = (id) => async (dispatch) => {
   }
 };
 
-
 export const addRecipe = (recipeObj) => async (dispatch) => {
   try {
-    const response = await fetch(url + "api/recipe", {
+    const response = await fetchWithAuth(url + "api/recipe", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token()}`,
       },
       body: JSON.stringify(recipeObj),
     });
@@ -58,13 +63,13 @@ export const addRecipe = (recipeObj) => async (dispatch) => {
   }
 };
 
-export const editRecipe = (id,recipeObj) => async (dispatch) => {
+export const editRecipe = (id, recipeObj) => async (dispatch) => {
   try {
-    const response = await fetch(url + `api/recipe/edit/${id}`, {
+    const response = await fetchWithAuth(url + `api/recipe/edit/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token()}`,
+       
       },
       body: JSON.stringify(recipeObj),
     });
@@ -82,10 +87,10 @@ export const editRecipe = (id,recipeObj) => async (dispatch) => {
 
 export const deleteRecipe = (id) => async (dispatch) => {
   try {
-    const response = await fetch(url + `api/recipe/delete/${id}`, {
+    const response = await fetchWithAuth(url + `api/recipe/delete/${id}`, {
       method: "PUT",
       headers: {
-        Authorization: `Bearer ${token()}`,
+        "Content-Type": "application/json",
       },
     });
     if (response.ok) {
@@ -112,15 +117,12 @@ export const fetchTopRecipes = () => async (dispatch) => {
   }
 };
 
-
-
 export const addUserFav = (userFavObj) => async (dispatch) => {
   try {
-    const response = await fetch(url + "api/userfavs", {
+    const response = await fetchWithAuth(url + "api/userfavs", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token()}`,
       },
       body: JSON.stringify(userFavObj),
     });
@@ -136,10 +138,10 @@ export const addUserFav = (userFavObj) => async (dispatch) => {
 
 export const deleteUserFav = (id) => async (dispatch) => {
   try {
-    const response = await fetch(url + `api/userfavs/${id}`, {
+    const response = await fetchWithAuth(url + `api/userfavs/${id}`, {
       method: "DELETE",
       headers: {
-        Authorization: `Bearer ${token()}`,
+        "Content-Type": "application/json",
       },
     });
     if (response.ok) {
@@ -154,10 +156,10 @@ export const deleteUserFav = (id) => async (dispatch) => {
 
 export const fetchUserFavs = (id) => async (dispatch) => {
   try {
-    const response = await fetch(url + `api/userfavs/${id}`, {
+    const response = await fetchWithAuth(url + `api/userfavs/${id}`, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${token()}`,
+        "Content-Type": "application/json",
       },
     });
     if (response.ok) {
@@ -174,11 +176,11 @@ export const fetchUserFavs = (id) => async (dispatch) => {
 
 export const addComment = (commentObj) => async (dispatch) => {
   try {
-    const response = await fetch(url + "api/comment", {
+    const response = await fetchWithAuth(url + "api/comment", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token()}`,
+       
       },
       body: JSON.stringify(commentObj),
     });
@@ -196,10 +198,10 @@ export const addComment = (commentObj) => async (dispatch) => {
 
 export const softDeleteComment = (id) => async (dispatch) => {
   try {
-    const response = await fetch(url + `api/comment/delete/${id}`, {
+    const response = await fetchWithAuth(url + `api/comment/delete/${id}`, {
       method: "PUT",
       headers: {
-        Authorization: `Bearer ${token()}`,
+        "Content-Type": "application/json",
       },
     });
     if (response.ok) {

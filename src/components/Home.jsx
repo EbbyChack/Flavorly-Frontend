@@ -23,10 +23,10 @@ function Home() {
     return unit === 'minutes'  && parseInt(time) <= 20;
   });
     
-  const italianRecipes = recipes.recipes && recipes.recipes.filter(recipe => {
-    return recipe.recipeCategories === 'Italian';
-  });
-  
+  const italianRecipes = recipes.recipes && recipes.recipes.filter(recipe =>
+    recipe.recipeCategories.some(category => category.idCategoryFk === 2)
+  );
+   
 
   return (
     <div className="container-fluid">
@@ -40,7 +40,7 @@ function Home() {
 
       <BentoGrid recipes={topRecipes} />
       {recipes.recipes && <RecipesCarousel title={"Quick recipes"} recipes={quickRecipes} />}
-      {recipes.recipes && <RecipesCarousel title={"Italian dishes"} recipes={quickRecipes} />}
+      {recipes.recipes && <RecipesCarousel title={"Italian dishes"} recipes={italianRecipes} />}
       
     </div>
   );

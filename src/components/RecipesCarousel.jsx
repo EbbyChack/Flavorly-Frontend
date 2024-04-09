@@ -40,7 +40,7 @@ function RecipesCarousel(props) {
         swipeable={true}
         draggable={true}
         responsive={responsive}
-        
+        infinite={true}
         autoPlaySpeed={1000}
         keyBoardControl={true}
         customTransition="transform 300ms ease-in-out"

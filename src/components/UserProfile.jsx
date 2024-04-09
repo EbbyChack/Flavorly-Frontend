@@ -24,8 +24,9 @@ function UserProfile() {
     const pathway = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier";
     userId = decodedToken[pathway];
   }
-
-  dispatch(fetchUserInfo(userId));
+  useEffect(() => {
+    dispatch(fetchUserInfo(userId));
+  }, [userId]);
 
   useEffect(() => {
     dispatch(fetchAllRecipes());
