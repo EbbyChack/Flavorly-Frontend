@@ -39,7 +39,7 @@ function MyNavbar() {
     <div className="position-sticky top-0 z-3">
       <Navbar expand="lg" className="customNav ">
         <Container className="d-flex align-items-center">
-        <Link to="/" className=" navbar-brand">
+          <Link to="/" className=" navbar-brand">
             <img
               src={Flavorly}
               className="d-inline-block align-top "
@@ -56,9 +56,14 @@ function MyNavbar() {
               <Link to="/allrecipes" className="nav-link">
                 All Recipes
               </Link>
-              <Link to="/profile" className="nav-link">
-                Profile
-              </Link>
+
+              {isLoggedIn ? (
+                <Link to="/profile" className="nav-link">
+                  Profile
+                </Link>
+              ) : (
+                null
+              )}
               {role === "Admin" && (
                 <Link to="/adminRecipes" className="nav-link">
                   Admin
@@ -73,7 +78,6 @@ function MyNavbar() {
                   Logout
                 </button>
               )}
-              
             </Nav>
           </Navbar.Collapse>
         </Container>

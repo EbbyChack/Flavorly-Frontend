@@ -3,6 +3,8 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap");
 
+
+
 .headings {
   font-family: "Dancing Script", cursive;
   font-size: 0.5em;
@@ -11,9 +13,9 @@
   justify-content: center;
   align-items: center;
   margin-block: 4em;
-  background-color: #ffe37252;
+  background-color: #ffeda380;
   border-radius: 5px;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(3px);
 }
 .headings span {
   font-size: clamp(4em, 5vw, 5.8em);
@@ -111,6 +113,7 @@
 .colBento {
   overflow-y: scroll;
   scrollbar-width: none;
+  padding: 5px 0;
 }
 
 @keyframes slide {
@@ -430,4 +433,65 @@
 
 .react-multiple-carousel__arrow--right {
   right: 0 !important;
+}
+
+/* footer */
+.footerCustom {
+  background-color: #000000;
+  padding: 30px;
+  color: #ffffff;
+  font-family: "Raleway", sans-serif;
+}
+.footerCustom p {
+  font-size: 0.9em;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.footerCustom h2 {
+  border-bottom: 1px solid #ffffff;
+}
+
+.footerCustom ul {
+  padding: 0;
+}
+
+.footerCustom li {
+  list-style: none;
+}
+.footerCustom li a {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 300;
+}
+
+.footerCustom li a:hover {
+  color: #eccf5a;
+  border-bottom: 1px solid #eccf5a;
+}
+
+.footerCustom .adminRequest {
+  background-color: #aca68e56;
+  
+  
+
+}
+.footerCustom .email-button {
+text-decoration: none;
+color: #ffffff;
+font-size: 800;
+background:#646153; 
+padding: 0.6em;
+border-radius: 3px;
+transition: all 0.3s ease-in-out;
+}
+
+.footerCustom .email-button:hover {
+  background: #eccf5a;
+  color: #000000;
+}
+
+
+.longerPage{
+  height: 80vh;
 }

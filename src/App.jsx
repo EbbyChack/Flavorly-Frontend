@@ -11,6 +11,7 @@ import MyNavbar from "./components/MyNavbar";
 import AdminRecipes from "./components/AdminRecipes";
 import PrivateAdminRoute from "./components/PrivateAdminRoute";
 import AdminRecipe from "./components/AdminRecipe";
+import MyFooter from "./components/MyFooter";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
 
           <Route path="*" element={<h1>Not Found</h1>} />
         </Routes>
+        <MyFooter />
       </BrowserRouter>
     </div>
   );
