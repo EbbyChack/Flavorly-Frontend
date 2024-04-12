@@ -21,6 +21,101 @@ import { clearSingleRecipe } from "../redux/reducers/recipeReducer";
 import { clearAverageRating } from "../redux/reducers/ratingsReducer";
 
 function Recipe() {
+  //test
+  const testObject = {
+    idRecipe: 11,
+    nameRecipe: "Aglio e olio",
+    description: "Aglio e olio",
+    cookingTime: "10 minutes",
+    servings: 2,
+    difficulty: "super easy",
+    instructions: "put aglio put olio and BAM",
+    mainImg:
+      "https://www.fattoincasadabenedetta.it/wp-content/uploads/2022/02/SPAGHETTI-AGLIO-OLIO-E-PEPERONCINO-sito-6.jpg",
+    img2: "https://www.fattoincasadabenedetta.it/wp-content/uploads/2022/02/SPAGHETTI-AGLIO-OLIO-E-PEPERONCINO-sito-6.jpg",
+    img3: "https://www.fattoincasadabenedetta.it/wp-content/uploads/2022/02/SPAGHETTI-AGLIO-OLIO-E-PEPERONCINO-sito-6.jpg",
+    videoUrl: "https://www.youtube.com/embed/bJUiWdM__Qw?si=_6pt-8W75aoSH8KU",
+    dateAdded: "2024-03-26",
+    isActive: true,
+    comments: [
+      {
+        idComment: 12,
+        userIdFk: 3,
+        username: "poski",
+        recipeIdFk: 0,
+        commentText: "prova",
+        datePosted: "2024-04-03T15:53:19.903",
+        isActive: false,
+      },
+    ],
+    ratings: [
+      {
+        idRating: 13,
+        idUserFk: 7,
+        idRecipeFk: 11,
+        ratingValue: 10,
+        idRecipeFkNavigation: null,
+        idUserFkNavigation: null,
+      },
+      {
+        idRating: 16,
+        idUserFk: 3,
+        idRecipeFk: 11,
+        ratingValue: 8,
+        idRecipeFkNavigation: null,
+        idUserFkNavigation: null,
+      },
+      {
+        idRating: 19,
+        idUserFk: 4,
+        idRecipeFk: 11,
+        ratingValue: 10,
+        idRecipeFkNavigation: null,
+        idUserFkNavigation: null,
+      },
+    ],
+    recipeCategories: [
+      {
+        idRecipeCat: 15,
+        idRecipeFk: 11,
+        idCategoryFk: 2,
+        idCategoryFkNavigation: null,
+        idRecipeFkNavigation: null,
+      },
+    ],
+    recipeIngredients: [
+      {
+        idRecipeIng: 36,
+        idRecipeFk: 11,
+        idIngredientFk: 3,
+        idIngredientFkNavigation: null,
+        idRecipeFkNavigation: null,
+      },
+      {
+        idRecipeIng: 37,
+        idRecipeFk: 11,
+        idIngredientFk: 4,
+        idIngredientFkNavigation: null,
+        idRecipeFkNavigation: null,
+      },
+      {
+        idRecipeIng: 38,
+        idRecipeFk: 11,
+        idIngredientFk: 1,
+        idIngredientFkNavigation: null,
+        idRecipeFkNavigation: null,
+      },
+    ],
+    userFavorites: [
+      {
+        idUserFav: 36,
+        idUserFk: 3,
+        idRecipeFk: 11,
+        idRecipeFkNavigation: null,
+        idUserFkNavigation: null,
+      },
+    ],
+  };
   //getting the id from the url
   const { id } = useParams();
 
@@ -162,7 +257,7 @@ function Recipe() {
           <h2>Rating:</h2>
 
           {averageRating.averageRating && (
-            <ReactStars count={5} value={averageRating.averageRating} size={60} isHalf={true} edit={false}  />
+            <ReactStars count={5} value={averageRating.averageRating} size={60} isHalf={true} edit={false} />
           )}
           <h6>N° ratings: {averageRating.numberOfRatings ? averageRating.numberOfRatings : 0}</h6>
 
@@ -234,18 +329,10 @@ function Recipe() {
                 isHalf={true}
                 edit={true}
                 onChange={(value) => updateRatingFunc(value)}
-                
               />
             )}
             {!userHasRated && (
-              <ReactStars
-                count={5}
-                size={60}
-                isHalf={true}
-                edit={true}
-                onChange={(value) => newRating(value)}
-                
-              />
+              <ReactStars count={5} size={60} isHalf={true} edit={true} onChange={(value) => newRating(value)} />
             )}
           </div>
 
