@@ -1,13 +1,13 @@
 /* navbar */
 @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap");
 
 .headings {
   font-family: "Cormorant Garamond", serif;
   font-size: 0.5em;
   font-weight: 500;
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   margin: 3em 0;
@@ -17,11 +17,15 @@
   border: 1px solid #9191912f;
   border-radius: 5px;
   box-shadow: 0px 10px 10px -5px #0000004b;
-  
 }
 
 .headings span {
   font-size: clamp(3em, 2.5vw, 5em);
+}
+
+.headings2 {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 500;
 }
 
 .customNav {
@@ -136,11 +140,113 @@
   background-position: center;
   background-size: 100% auto;
   background-size: cover;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding-inline: 5em;
+  padding-block: 5em;
+  
 }
+
+.filterSidebar {
+  font-family: "Cormorant Garamond", serif;
+  margin-top: 3.5em;
+  margin-bottom: 1em;
+  padding: 0.5em;
+  background-color: #aaaaaa5e;
+  backdrop-filter: blur(3px);
+  border-radius: 5px;
+  width: 100%;
+  height: fit-content;
+}
+
+.filterBtn {
+  background: none;
+  border: none;
+  font-size: 2em;
+  font-weight: 700;
+  line-height: 1px;
+  padding-block: 0.3em;
+}
+.filterBtn:hover {
+  cursor: pointer;
+  color: rgb(56, 56, 56);
+  border-bottom: 1px solid black; /* Adjust thickness and color as needed */
+}
+.filterBtn #chevron {
+  font-size: 0.5em;
+}
+
+.filterSidebar input[type="checkbox"] {
+  display: none;
+}
+
+.filterSidebar label {
+  font-size: 1.1em;
+  font-weight: 600;
+  padding: 1px 0.5em;
+  margin: 0.2em 0.2em;
+  background-color: #ffffffad;
+  border-radius: 50em;
+
+  cursor: pointer;
+}
+
+.filterSidebar label:hover {
+  background-color: #eccf5a !important;
+}
+
+
+
+.filterSidebar input[type="checkbox"]:checked + label {
+  background-color: #eccf5a;
+  text-decoration: underline;
+}
+.filterSidebar input[type="checkbox"]:not(:checked) + label {
+  background-color: #ffffffad;
+}
+ .clearBtn{
+  background: none;
+  font-size: 1.1em;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  height: min-content;
+ }
+  .clearBtn:hover{
+    text-decoration: underline;
+    color: #a73030;
+  }
+  @media (max-width: 1600px) {
+    
+    .filterSidebar label {
+      /* Adjust the styles as needed for smaller screens */
+      font-size: 0.9em;
+      
+    }
+    .filterSidebar .filterType h3{
+      font-size: 1.2em;
+    }
+   
+    .filterSidebar .filterType .clearBtn{
+      font-size: 0.8em;
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .bigFilter{
+      display: none;
+    }
+
+    .filterSidebar {
+      margin-top: 1em;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .smallFilter{
+      display: none;
+    }
+  }
+  
+
 
 .homeBg {
   background-image: url("../src/assets/img/marble.jpg");
@@ -417,14 +523,11 @@
   position: relative;
 }
 
-.topHomeBanner #myVideo{
-  
+.topHomeBanner #myVideo {
   width: 100%;
   height: 50vh;
   object-position: center;
   object-fit: cover;
- 
-
 }
 
 .topHomeBanner .videoText {
@@ -437,13 +540,11 @@
   font-family: "Raleway", sans-serif;
 }
 
-.topHomeBanner .videoText p{
+.topHomeBanner .videoText p {
   background-color: #0000005e;
-  
+
   box-shadow: 0 30px 40px rgba(0, 0, 0, 0.952);
 }
-
-
 
 .react-multiple-carousel__arrow {
   position: absolute;
@@ -518,33 +619,26 @@
 }
 
 .longerPage {
-  height: 80vh;
+  min-height: 80vh;
 }
 
 /* buger */
 
-.allContainer{
+.allContainer {
   position: fixed;
   bottom: 0;
   right: 0;
- 
-  
 }
 
 .burgerImg {
   width: 10em;
   object-fit: contain;
   filter: drop-shadow(0 0 8px #00000098);
-
 }
 
 .burgerContainer {
- position: relative;
+  position: relative;
 }
-
-
-
-
 
 .eye_container {
   display: flex;
@@ -587,3 +681,55 @@
   transition: 0.5s;
 }
 
+/* search input */
+
+.search{
+  position: relative;
+}
+
+.search__input {
+  font-family: inherit;
+  font-size: inherit;
+  background-color: #f4f2f2;
+  border: none;
+  color: #646464;
+  padding: 0.4rem 1rem;
+  border-radius: 30px;
+  width: 100%;
+  transition: all ease-in-out 0.5s;
+  margin-right: -2rem;
+
+
+}
+
+.search__input:hover,
+.search__input:focus {
+  box-shadow: 0 0 1em #00000013;
+}
+
+.search__input:focus {
+  outline: none;
+  background-color: #f0eeee;
+}
+
+.search__input::-webkit-input-placeholder {
+  font-weight: 100;
+  color: #ccc;
+}
+
+.search__input:focus + .search__button {
+  background-color: #f0eeee;
+}
+
+.search__button {
+  border: none;
+  background-color: #f4f2f2;
+  margin-top: 0.1em;
+  position: absolute;
+  right: 8px;
+  top: 3px;
+}
+
+.search__button:hover {
+  cursor: pointer;
+}
