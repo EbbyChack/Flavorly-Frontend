@@ -22,7 +22,7 @@ function AdminRecipes() {
   const [modalShow, setModalShow] = useState(false);
 
   return (
-    <div className="allRecipesBackground">
+    <div className="allRecipesBackground d-flex justify-content-center">
       <div className="container m-5">
         <CreateRecipeForm show={modalShow} onHide={() => setModalShow(false)} />
         <div className="d-flex justify-content-between align-items-center">

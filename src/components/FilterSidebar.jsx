@@ -6,37 +6,45 @@ import { faChevronDown, faChevronUp, faSearch } from "@fortawesome/free-solid-sv
 function FilterSidebar({ handleCategoriesChange, handleIngredientsChange, clearCat, clearIng }) {
   const [isOpen, setIsOpen] = useState(true);
   const [ingSearchTerm, setIngSearchTerm] = useState("");
-  
+  const [displayCount, setDisplayCount] = useState(20);
+
   const handleClick = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleSeeMore = () => {
+    setDisplayCount(displayCount + 20);
+  };
+
+  const handleSeeLess = () => {
+    setDisplayCount(Math.max(20, displayCount - 20));
   };
 
   const clearCategories = () => {
     clearCat();
     ingredientsAndCategories.categories.forEach((category) => {
-        const checkbox = document.getElementById(`category-${category.idCategory}`);
-        if (checkbox) {
-          checkbox.checked = false;
-        }
+      const checkbox = document.getElementById(`category-${category.idCategory}`);
+      if (checkbox) {
+        checkbox.checked = false;
+      }
     });
   };
 
   const clearIngredients = () => {
     clearIng();
     ingredientsAndCategories.ingredients.forEach((ingredient) => {
-        const checkbox = document.getElementById(`ingredient-${ingredient.idIngredient}`);
-        if (checkbox) {
-          checkbox.checked = false;
-        }
-    }
-    );
+      const checkbox = document.getElementById(`ingredient-${ingredient.idIngredient}`);
+      if (checkbox) {
+        checkbox.checked = false;
+      }
+    });
   };
 
   const ingredientsAndCategories = useSelector((state) => state.ingredientsAndCategories.ingredientsAndCategories);
 
   const filteredIngredients = ingredientsAndCategories.ingredients
     .filter((ingredient) => ingredient.nameIngredient.toLowerCase().includes(ingSearchTerm.toLowerCase()))
-    .slice(0, 20);
+    .slice(0, displayCount);
   return (
     <div>
       <div className="filterSidebar">
@@ -92,6 +100,13 @@ function FilterSidebar({ handleCategoriesChange, handleIngredientsChange, clearC
                 <label htmlFor={`ingredient-${ingredient.idIngredient}`}>{ingredient.nameIngredient}</label>
               </span>
             ))}
+            <div className="d-flex justify-content-end px-3">
+              {displayCount > 20 && <span onClick={handleSeeLess} className="ingBtn"> See less </span>}
+              {displayCount < ingredientsAndCategories.ingredients.length && (
+                <span onClick={handleSeeMore} className="ms-auto ingBtn"> See more... </span>
+              )}
+            
+            </div>
           </>
         )}
       </div>
