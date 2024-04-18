@@ -10,6 +10,7 @@ import RecipesCarousel from "./RecipesCarousel";
 import HomeBackground from "../assets/video/HomeBackground.mp4";
 import savor from "../assets/img/savor.png";
 import Eyes from "./Eyes";
+import Sentences from "./Sentences";
 
 function Home() {
   const dispatch = useDispatch();
@@ -40,22 +41,13 @@ function Home() {
           <source src={HomeBackground} type="video/mp4" />
         </video>
         <div className="videoText">
-          <p className="">Dive into a world where every dish tells a story and every flavor ignites a sensation.</p>
-          <p>Whether you're a culinary enthusiast, an adventurous foodie, or simply seeking to elevate your palate.</p>
-          <p>
-            Our team of seasoned chefs and food experts is dedicated to bringing you the finest culinary experiences,
-            transforming ordinary meals into extraordinary delights.
-          </p>
-          <p className=" d-inline"> So, just layback and savor the flavor!</p>
+          <Sentences />
         </div>
       </div>
 
       <div className="px-5">
         <BentoGrid recipes={topRecipes} />
-        {/* <div className="mx-5 my-3">
-          
-          <Eyes />
-        </div> */}
+       
 
         {recipes.recipes && <RecipesCarousel title={"Quick recipes"} recipes={quickRecipes} />}
         {recipes.recipes && <RecipesCarousel title={"Italian dishes"} recipes={italianRecipes} />}

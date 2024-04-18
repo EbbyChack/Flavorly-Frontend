@@ -26,7 +26,7 @@ function AdminRecipes() {
       <div className="container m-5">
         <CreateRecipeForm show={modalShow} onHide={() => setModalShow(false)} />
         <div className="d-flex justify-content-between align-items-center">
-          <h1>All recipes</h1>
+          <h1 className="headings2">All recipes</h1>
           <button className="btn btn-dark" onClick={() => setModalShow(true)}>
             Add recipe
           </button>

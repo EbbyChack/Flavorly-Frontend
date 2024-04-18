@@ -7,6 +7,8 @@ import { toast } from "react-toastify";
 import { fetchLogout } from "../redux/actions/auth";
 import { clearUserInfo } from "../redux/reducers/userReducer";
 import { jwtDecode as jwt_decode } from "jwt-decode";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSignInAlt, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 
 function MyNavbar() {
   const isLoggedIn = useSelector((state) => Boolean(state.auth.loggedProfile));
@@ -50,32 +52,40 @@ function MyNavbar() {
           <Navbar.Toggle aria-controls="navbarNav" />
           <Navbar.Collapse id="navbarNav">
             <Nav className="ms-auto menuStyle">
-              <Link to="/" className="nav-link">
+              <Link to="/" className="nav-link customNavLink">
                 Home
               </Link>
-              <Link to="/allrecipes" className="nav-link">
+              <Link to="/allrecipes" className="nav-link customNavLink">
                 All Recipes
               </Link>
 
               {isLoggedIn ? (
-                <Link to="/profile" className="nav-link">
+                <Link to="/profile" className="nav-link customNavLink">
                   Profile
                 </Link>
-              ) : (
-                null
-              )}
+              ) : null}
               {role === "Admin" && (
-                <Link to="/adminRecipes" className="nav-link">
+                <Link to="/adminRecipes" className="nav-link customNavLink">
                   Admin
                 </Link>
               )}
               {!isLoggedIn ? (
-                <Link to="/login" className="nav-link bg-light rounded rounded-3">
-                  Login
+                <Link to="/login">
+                  <button class="logoutBtn ms-lg-3">
+                    <div class="sign">
+                      <FontAwesomeIcon icon={faSignInAlt} />
+                    </div>
+
+                    <div class="text">Login</div>
+                  </button>
                 </Link>
               ) : (
-                <button onClick={handleLogout} className="nav-link bg-light rounded rounded-3">
-                  Logout
+                <button class="logoutBtn ms-lg-3" onClick={handleLogout}>
+                  <div class="sign">
+                  <FontAwesomeIcon icon={faSignOutAlt} />
+                  </div>
+
+                  <div class="text">Logout</div>
                 </button>
               )}
             </Nav>

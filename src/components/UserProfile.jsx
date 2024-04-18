@@ -10,130 +10,17 @@ import { jwtDecode as jwt_decode } from "jwt-decode";
 import ChangePassword from "./ChangePassword";
 
 import { ToastContainer } from "react-toastify";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCog } from "@fortawesome/free-solid-svg-icons";
+import RecipesCarousel from "./RecipesCarousel";
+import FavCarousel from "./FavCarousel";
+import CommentsCarousel from "./CommentsCarousel";
 
 function UserProfile() {
   const dispatch = useDispatch();
 
   //getting the userid from the token using jwt-decode
   const token = useSelector((state) => state.auth.loggedProfile);
-
-  //test
-  const testObject = {
-    userId: 3,
-    username: "poski",
-    email: "lallygar1@gmail.com",
-    name: "Laura",
-    surname: "Garulli",
-    dateOfBirth: "1999-08-23",
-    comments: [
-      {
-        idComment: 8,
-        userIdFk: 3,
-        recipeIdFk: 14,
-        commentText: "ciao",
-        datePosted: "2024-04-03T00:02:58.067",
-        isActive: true,
-        recipeIdFkNavigation: null,
-        userIdFkNavigation: null,
-      },
-      {
-        idComment: 11,
-        userIdFk: 3,
-        recipeIdFk: 14,
-        commentText: "prova",
-        datePosted: "2024-04-03T00:11:11.167",
-        isActive: true,
-        recipeIdFkNavigation: null,
-        userIdFkNavigation: null,
-      },
-      {
-        idComment: 12,
-        userIdFk: 3,
-        recipeIdFk: 11,
-        commentText: "prova",
-        datePosted: "2024-04-03T15:53:19.903",
-        isActive: true,
-        recipeIdFkNavigation: null,
-        userIdFkNavigation: null,
-      },
-      {
-        idComment: 16,
-        userIdFk: 3,
-        recipeIdFk: 22,
-        commentText: "Fatto cosi è spaziale!! ",
-        datePosted: "2024-04-09T14:35:39.5",
-        isActive: true,
-        recipeIdFkNavigation: null,
-        userIdFkNavigation: null,
-      },
-    ],
-    ratings: [
-      {
-        idRating: 15,
-        idUserFk: 3,
-        idRecipeFk: 10,
-        ratingValue: 10,
-        idRecipeFkNavigation: null,
-        idUserFkNavigation: null,
-      },
-      {
-        idRating: 16,
-        idUserFk: 3,
-        idRecipeFk: 11,
-        ratingValue: 8,
-        idRecipeFkNavigation: null,
-        idUserFkNavigation: null,
-      },
-      {
-        idRating: 17,
-        idUserFk: 3,
-        idRecipeFk: 13,
-        ratingValue: 10,
-        idRecipeFkNavigation: null,
-        idUserFkNavigation: null,
-      },
-      {
-        idRating: 18,
-        idUserFk: 3,
-        idRecipeFk: 14,
-        ratingValue: 5,
-        idRecipeFkNavigation: null,
-        idUserFkNavigation: null,
-      },
-      {
-        idRating: 23,
-        idUserFk: 3,
-        idRecipeFk: 16,
-        ratingValue: 9,
-        idRecipeFkNavigation: null,
-        idUserFkNavigation: null,
-      },
-      {
-        idRating: 24,
-        idUserFk: 3,
-        idRecipeFk: 17,
-        ratingValue: 9,
-        idRecipeFkNavigation: null,
-        idUserFkNavigation: null,
-      },
-      {
-        idRating: 25,
-        idUserFk: 3,
-        idRecipeFk: 18,
-        ratingValue: 1,
-        idRecipeFkNavigation: null,
-        idUserFkNavigation: null,
-      },
-      {
-        idRating: 26,
-        idUserFk: 3,
-        idRecipeFk: 19,
-        ratingValue: 8,
-        idRecipeFkNavigation: null,
-        idUserFkNavigation: null,
-      },
-    ],
-  };
 
   let userId = "";
 
@@ -159,72 +46,134 @@ function UserProfile() {
 
   const [modalShow, setModalShow] = useState(false);
 
+  const favRecipes =
+    recipes && userFavs
+      ? userFavs.map((fav) => recipes.find((recipe) => recipe.idRecipe === fav.idRecipeFk)).filter(Boolean)
+      : [];
+
+  const [numCommentsToShow, setNumCommentsToShow] = useState(3);
+
+  const handleSeeMoreComments = () => {
+    setNumCommentsToShow(userInfo.comments.length);
+  };
+
+  const handleSeeLessComments = () => {
+    setNumCommentsToShow(3);
+  };
+
+  const [numRatingsToShow, setNumRatingsToShow] = useState(3);
+
+  const handleSeeMoreRatings = () => {
+    setNumRatingsToShow(userInfo.ratings.length);
+  };
+
+  const handleSeeLessRatings = () => {
+    setNumRatingsToShow(3);
+  };
+
   return (
     <div>
       <ToastContainer />
       {userInfo && (
-        <div className="container">
-          <h1>{userInfo.username}</h1>
-          <p>{userInfo.name}</p>
-          <p>{userInfo.surname}</p>
-          <p>{userInfo.email}</p>
-          <button className="btn btn-dark" onClick={() => setModalShow(true)}>
-            Change password
-          </button>
-          <ChangePassword show={modalShow} onHide={() => setModalShow(false)} />
-          <p>{formatDateNoTime(userInfo.dateOfBirth)}</p>
-          <div>
-            <h3>Comments</h3>
-            {userInfo.comments &&
-              userInfo.comments.map((comment) => {
-                const recipe = recipes && recipes.find((recipe) => recipe.idRecipe === comment.recipeIdFk);
-                return (
-                  recipe && (
-                    <div key={comment.idComment}>
-                      <Link to={`/recipe/${recipe.idRecipe}`}>{recipe.nameRecipe}</Link>
-                      <p>{comment.commentText}</p>
-                      <p>{formatDate(comment.datePosted)}</p>
-                    </div>
-                  )
-                );
-              })}
-          </div>
+        <div className="profileBg">
+          <div className="profileContainer">
+            <div className="userInfoSec">
+              <div className="userInfoSec2">
+                <h3>
+                  {userInfo.name} {userInfo.surname}
+                </h3>
+                <p>@{userInfo.username}</p>
+                <p>{userInfo.email}</p>
+              </div>
+              <div>
+                <span onClick={() => setModalShow(true)}>Modify password</span>
+                <ChangePassword show={modalShow} onHide={() => setModalShow(false)} />
+              </div>
+            </div>
 
-          <div>
-            <h3>Ratings</h3>
-            {userInfo.ratings &&
-              userInfo.ratings.map((rating) => {
-                const recipe = recipes && recipes.find((recipe) => recipe.idRecipe === rating.idRecipeFk);
-                return (
-                  recipe && (
-                    <div key={rating.idRating}>
-                      <Link to={`/recipe/${recipe.idRecipe}`}>{recipe.nameRecipe}</Link>
-                      <ReactStars
-                        count={5}
-                        size={30}
-                        value={rating.ratingValue / 2}
-                        isHalf={true}
-                        edit={false}
-                        char="✪"
-                      />
-                    </div>
-                  )
-                );
-              })}
-          </div>
-          <div>
-            <h3>Favorite recipes</h3>
-            {userFavs &&
-              userFavs.map((fav) => {
-                const recipe = recipes && recipes.find((recipe) => recipe.idRecipe === fav.idRecipeFk);
-                return (
-                  recipe && (
-                    <div key={fav.idUserFav}>
-                      <Link to={`/recipe/${recipe.idRecipe}`}>{recipe.nameRecipe}</Link>
-                    </div>
-                  )
-                );
-              })}
+            {favRecipes && <FavCarousel title={"Your favorite recipes"} recipes={favRecipes} />}
+
+            <div className="commentsSec container">
+              <h1 className="headings">
+                ━━━<span>Comments</span>━━━
+              </h1>
+              <div className="row g-4">
+                {userInfo.comments &&
+                  userInfo.comments.slice(0, numCommentsToShow).map((comment) => {
+                    const recipe = recipes && recipes.find((recipe) => recipe.idRecipe === comment.recipeIdFk);
+                    return (
+                      recipe && (
+                        <div className="col-lg-6 col-xl-4" key={comment.idComment}>
+                          <div className="singleComment">
+                            <Link className="linkTo" to={`/recipe/${recipe.idRecipe}`}>
+                              {recipe.nameRecipe}
+                            </Link>
+                            <p>"{comment.commentText}"</p>
+                            <p className="time">{formatDate(comment.datePosted)}</p>
+                          </div>
+                        </div>
+                      )
+                    );
+                  })}
+              </div>
+              {numCommentsToShow <= 3 ? (
+                <div className="d-flex justify-content-end">
+                  <span className=" seeMore " onClick={handleSeeMoreComments}>
+                    See More...
+                  </span>
+                </div>
+              ) : (
+                <div className="d-flex justify-content-end">
+                  <span className=" seeMore " onClick={handleSeeLessComments}>
+                    See Less
+                  </span>
+                </div>
+              )}
+            </div>
+
+            <div className="commentsSec container">
+              <h1 className="headings">
+                ━━━<span>Ratings</span>━━━
+              </h1>
+              <div className="row g-4">
+                {userInfo.ratings &&
+                  userInfo.ratings.slice(0, numRatingsToShow).map((rating) => {
+                    const recipe = recipes && recipes.find((recipe) => recipe.idRecipe === rating.idRecipeFk);
+                    return (
+                      recipe && (
+                        <div className="col-lg-6 col-xl-4" key={rating.idRating}>
+                          <div className="profileRating">
+                            <Link className="linkTo" to={`/recipe/${recipe.idRecipe}`}>
+                              {recipe.nameRecipe}
+                            </Link>
+                            <ReactStars
+                              count={5}
+                              size={30}
+                              value={rating.ratingValue / 2}
+                              isHalf={true}
+                              edit={false}
+                              char="✪"
+                            />
+                          </div>
+                        </div>
+                      )
+                    );
+                  })}
+              </div>
+              {numRatingsToShow <= 3 ? (
+                <div className="d-flex justify-content-end">
+                  <span className=" seeMore " onClick={handleSeeMoreRatings}>
+                    See More...
+                  </span>
+                </div>
+              ) : (
+                <div className="d-flex justify-content-end">
+                  <span className=" seeMore " onClick={handleSeeLessRatings}>
+                    See Less
+                  </span>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}
