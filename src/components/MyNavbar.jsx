@@ -47,7 +47,7 @@ function MyNavbar() {
           <Link to="/" className=" navbar-brand">
             <img
               src={Flavorly}
-              className="d-inline-block align-top "
+              className="d-inline-block align-top navLogo "
               alt="React Bootstrap logo"
               style={{ width: "10em" }}
             />

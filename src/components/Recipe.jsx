@@ -272,7 +272,7 @@ function Recipe() {
                       <div className="col-12 singleComment" key={comment.idComment}>
                         <div className="row">
                           <div className="col-lg-6">
-                            <p className="user">{comment.username}</p>
+                            <p className="user">@{comment.username}</p>
                             <p className="commentText">{comment.commentText}</p>
                           </div>
                          
@@ -303,7 +303,7 @@ function Recipe() {
                     placeholder="Write your comment here..."
                     className="form-control"
                   />
-                  <button type="submit" className="btn btn-dark">
+                  <button type="submit" className="commentPostBtn">
                     Post
                   </button>
                 </form>
