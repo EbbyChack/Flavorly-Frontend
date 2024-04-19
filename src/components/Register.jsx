@@ -42,93 +42,81 @@ function Register() {
     dispatch(fetchRegister("api/Auth/register", registerObj));
   };
   return (
-    <div className="longerPage">
-      <div className="container my-5">
+    <div className="loginBg longerPage">
+      <div className="py-5">
         <ToastContainer />
         <div className="row justify-content-center">
-          <div className="col-4">
-            <h1>Register</h1>
-            <form onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label htmlFor="username">Username</label>
+          <div className="col-10 col-sm-8 col-md-6 col-lg-4 col-xl-3">
+            <div className="register-form-container">
+              <p className="formTitle">Register</p>
+              <form className="loginForm" onSubmit={handleSubmit}>
                 <input
                   type="text"
-                  className="form-control"
+                  className="login-input"
                   id="username"
                   placeholder="Enter Username"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                 />
-              </div>
-              <div className="form-group">
-                <label htmlFor="password">Password</label>
+
                 <input
                   type="password"
-                  className="form-control"
+                  className="login-input"
                   id="password"
                   placeholder="Enter Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-              </div>
-              <div className="form-group">
-                <label htmlFor="confirmpassword">Password</label>
+
                 <input
                   type="password"
-                  className="form-control"
+                  className="login-input"
                   id="confirmpassword"
                   placeholder="Enter Password Again"
                   value={confirmpassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 />
-              </div>
-              <div className="form-group">
-                <label htmlFor="email">Email</label>
+
                 <input
                   type="email"
-                  className="form-control"
+                  className="login-input"
                   id="email"
                   placeholder="Enter Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
-              </div>
-              <div className="form-group">
-                <label htmlFor="name">Name</label>
+
                 <input
                   type="text"
-                  className="form-control"
+                  className="login-input"
                   id="name"
                   placeholder="Enter Name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
-              </div>
-              <div className="form-group">
-                <label htmlFor="surname">Surname</label>
+
                 <input
                   type="text"
-                  className="form-control"
+                  className="login-input"
                   id="surname"
                   placeholder="Enter Surname"
                   value={surname}
                   onChange={(e) => setSurname(e.target.value)}
                 />
-              </div>
-              <div className="form-group">
-                <label htmlFor="dateOfBirth">Date of Birth</label>
+
                 <input
                   type="date"
-                  className="form-control"
+                  className="login-input"
                   id="dateOfBirth"
                   value={dateOfBirth}
                   onChange={(e) => setDateOfBirth(e.target.value)}
                 />
-              </div>
-              <button type="submit" className="btn btn-dark mt-3">
-                Register
-              </button>
-            </form>
+
+                <button type="submit" className="form-btn">
+                  Register
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </div>

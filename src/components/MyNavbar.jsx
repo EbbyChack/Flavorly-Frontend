@@ -19,6 +19,7 @@ function MyNavbar() {
     try {
       dispatch(fetchLogout());
       dispatch(clearUserInfo());
+      setExpanded(false);
       toast.success("Logout successful");
     } catch (e) {
       toast.error("Logout failed");
@@ -37,9 +38,11 @@ function MyNavbar() {
     role = decodedToken[pathway];
   }
 
+  const [expanded, setExpanded] = React.useState(false);
+
   return (
     <div className="position-sticky top-0 z-3">
-      <Navbar expand="lg" className="customNav ">
+      <Navbar expand="lg" className="customNav " expanded={expanded} onToggle={setExpanded}>
         <Container className="d-flex align-items-center">
           <Link to="/" className=" navbar-brand">
             <img
@@ -52,41 +55,47 @@ function MyNavbar() {
           <Navbar.Toggle aria-controls="navbarNav" />
           <Navbar.Collapse id="navbarNav">
             <Nav className="ms-auto menuStyle">
-              <Link to="/" className="nav-link customNavLink">
+              <Link to="/" className="nav-link customNavLink" onClick={() => setExpanded(false)}>
                 Home
               </Link>
-              <Link to="/allrecipes" className="nav-link customNavLink">
+              <Link to="/allrecipes" className="nav-link customNavLink" onClick={() => setExpanded(false)}>
                 All Recipes
               </Link>
 
               {isLoggedIn ? (
-                <Link to="/profile" className="nav-link customNavLink">
+                <Link to="/profile" className="nav-link customNavLink" onClick={() => setExpanded(false)}>
                   Profile
                 </Link>
               ) : null}
               {role === "Admin" && (
-                <Link to="/adminRecipes" className="nav-link customNavLink">
+                <Link to="/adminRecipes" className="nav-link customNavLink" onClick={() => setExpanded(false)}>
                   Admin
                 </Link>
               )}
               {!isLoggedIn ? (
-                <Link to="/login">
-                  <button class="logoutBtn ms-lg-3">
-                    <div class="sign">
+                <Link to="/login" onClick={() => setExpanded(false)}>
+                  <button className="d-none d-lg-flex logoutBtn ms-lg-3">
+                    <div className="sign">
                       <FontAwesomeIcon icon={faSignInAlt} />
                     </div>
 
-                    <div class="text">Login</div>
+                    <div className="text">Login</div>
                   </button>
+                  <span className="d-lg-none nav-link customNavLink">Login</span>
                 </Link>
               ) : (
-                <button class="logoutBtn ms-lg-3" onClick={handleLogout}>
-                  <div class="sign">
-                  <FontAwesomeIcon icon={faSignOutAlt} />
-                  </div>
+                <>
+                  <button className="d-none d-lg-flex  logoutBtn ms-lg-3" onClick={handleLogout}>
+                    <div className="sign">
+                      <FontAwesomeIcon icon={faSignOutAlt} />
+                    </div>
 
-                  <div class="text">Logout</div>
-                </button>
+                    <div className="text">Logout</div>
+                  </button>
+                  <span onClick={handleLogout} className="d-lg-none nav-link customNavLink">
+                    Logout
+                  </span>
+                </>
               )}
             </Nav>
           </Navbar.Collapse>

@@ -47,7 +47,8 @@ export const fetchRegister = (path, registerObj) => async (dispatch) => {
     });
     if (response.ok) {
       const data = await response.text();
-      dispatch(login(data));
+      toast.success("Register successful");
+    
     } else {
       const error = await response.text();
       toast.error(error);

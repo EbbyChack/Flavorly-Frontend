@@ -22,45 +22,40 @@ function LoginForm() {
     navigate("/");
   };
   return (
-    <div className="longerPage">
-      <div className="container my-5">
+    <div className="loginBg longerPage">
+      <div className="py-5">
         <ToastContainer />
         <div className="row justify-content-center">
-          <div className="col-8 col-md-4">
-            <h1>Login</h1>
-            <form onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label htmlFor="exampleusername">Username</label>
+          <div className="col-10 col-sm-8 col-md-6 col-lg-4 col-xl-3">
+            <div className="login-form-container">
+              <p className="formTitle">Welcome back!</p>
+              <form className="loginForm" onSubmit={handleSubmit}>
                 <input
                   type="username"
-                  className="form-control "
+                  className="login-input"
                   id="exampleusername"
                   aria-describedby="emailHelp"
                   placeholder="Enter Username"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                 />
-              </div>
-              <div className="form-group">
-                <label htmlFor="exampleInputPassword1">Password</label>
+
                 <input
                   type="password"
-                  className="form-control "
+                  className="login-input"
                   id="exampleInputPassword1"
                   placeholder="Enter Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-              </div>
 
-              <button type="submit" className="btn btn-dark mt-3">
-                Submit
-              </button>
-            </form>
-
-            <div className="mt-3">
-              <p>Don't have an account?</p>
-              <Link to="/register">Register</Link>
+                <button type="submit" className="form-btn">
+                  Log in
+                </button>
+              </form>
+              <p className="sign-up-label">
+                Don't have an account? <Link to="/register">Sign up</Link>
+              </p>
             </div>
           </div>
         </div>

@@ -45,7 +45,7 @@ function Home() {
         </div>
       </div>
 
-      <div className="px-5">
+      <div className="px-md-5">
         <BentoGrid recipes={topRecipes} />
        
 

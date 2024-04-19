@@ -5,6 +5,8 @@
 
 @import url("https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Quattrocento:wght@400;700&display=swap");
 
+@import url("https://fonts.googleapis.com/css2?family=Mate:ital@0;1&display=swap");
+
 .headings {
   font-family: "Cormorant Garamond", serif;
   font-size: 0.5em;
@@ -152,13 +154,13 @@
     padding-left: 0px;
     padding-bottom: 15px;
     width: 100%;
-    background: #ffffff;
+    background: #ffd940a6;
+    backdrop-filter: blur(10px);
     max-width: 70vw;
     height: 100vh;
     overflow-y: auto;
     border-radius: 10px;
     font-size: 0.8em;
-    background-image: url("../src/assets/img/wood.jpeg");
 
     background-repeat: no-repeat;
     background-size: cover;
@@ -179,21 +181,11 @@
   }
 
   .navbar-collapse .nav-link {
-    text-align: center;
-
-    background-color: #be8b57b4;
-
     width: max-content;
     margin: 9px 70px 0 70px;
     padding: 0.2em 0.5em;
     border-radius: 5px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  }
-
-  .navbar-collapse .menuStyle {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    font-size: clamp(1.5em, 5vw, 2em);
   }
 
   .customNav img {
@@ -244,6 +236,21 @@
   background-size: cover;
   padding-inline: 5em;
   padding-block: 5em;
+}
+
+@media (max-width: 991px) {
+  .allRecipesBackground {
+    padding-inline: 1em;
+  }
+
+  .recipeBg {
+    padding-inline: 1em !important;
+  }
+
+  .recipeImgsContainer {
+    padding: 0 !important;
+    margin-bottom: 1em;
+  }
 }
 
 .filterSidebar {
@@ -355,6 +362,12 @@
   overflow: visible;
   width: 100%;
   height: 26em;
+}
+
+@media (max-width: 991px) {
+  .CustomCard {
+    height: 20em;
+  }
 }
 
 .BentoCustomCard {
@@ -609,7 +622,6 @@
 
   background-size: cover;
   background-position: center;
-  background-blend-mode: darken;
 
   border-radius: 5px;
 
@@ -622,6 +634,17 @@
   height: 50vh;
   object-position: center;
   object-fit: cover;
+  filter: brightness(0.6);
+}
+
+@media (max-width: 991px) {
+  .topHomeBanner #myVideo {
+    height: 30vh;
+  }
+
+  .topHomeBanner .videoText {
+    font-size: 1.1em;
+  }
 }
 
 .topHomeBanner .videoText {
@@ -843,7 +866,7 @@
   background-position: center;
   background-size: cover;
 
-  padding-inline: clamp(1em, 10vw, 10em);
+  padding-inline: 5em;
   padding-block: 5em;
 }
 
@@ -893,6 +916,11 @@
   background: #ffdede;
 }
 
+@media (max-width: 991px) {
+  .like-button {
+    font-size: 1.3em;
+  }
+}
 .recipeImgsContainer {
   display: flex;
   padding: 1em;
@@ -1185,13 +1213,11 @@
 }
 
 .sentence {
-  font-size: clamp(1em, 2.5vw, 5em);
-  font-weight: 700;
-  font-family: "Cormorant Garamond", serif;
-  background-color: #00000062;
+  font-size: clamp(1em, 2.5vw, 4em);
+  font-weight: 300;
+  font-family: "DM Serif Display", serif;
   padding: 0.5em;
-  transition: box-shadow 0.5s ease-in-out; /* Apply transition effect to box shadow */
-  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5); /* Initial box shadow */
+  filter: drop-shadow(0 0 20px #fafafa);
 }
 
 .transition-text-out {
@@ -1202,4 +1228,105 @@
 .transition-text-in {
   opacity: 1;
   transition: opacity 0.5s ease-in-out; /* You can adjust the transition duration and timing function as needed */
+}
+
+/* login form */
+
+.loginBg {
+  background-image: url("../src/assets/img/blur.jpg");
+  backdrop-filter: blur(5px);
+
+  background-repeat: repeat-y;
+  background-position: center;
+  background-size: cover;
+}
+
+.login-form-container {
+  height: 400px;
+  background-color: #ffffff;
+
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 10px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 20px 30px;
+}
+
+.register-form-container {
+  background-color: #ffffff;
+
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 20px 30px;
+}
+
+.formTitle {
+  text-align: center;
+  font-family: "Cormorant Garamond", serif;
+  margin: 10px 0 30px 0;
+  font-size: clamp(2em, 2.5vw, 3em);
+  font-weight: 800;
+}
+
+.loginForm {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 15px;
+}
+
+.login-input {
+  border-radius: 20px;
+  border: 1px solid #c0c0c0;
+  outline: 0 !important;
+  box-sizing: border-box;
+  padding: 12px 15px;
+}
+
+.page-link {
+  text-decoration: underline;
+  margin: 0;
+  text-align: end;
+  color: #747474;
+  text-decoration-color: #747474;
+}
+
+.form-btn {
+  padding: 10px 15px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  border-radius: 20px;
+  border: 0 !important;
+  outline: 0 !important;
+  background: #f8c600;
+  color: white;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.form-btn:hover {
+  background: #ffd21c;
+  transform: scale(1.03);
+}
+
+.form-btn:active {
+  box-shadow: none;
+}
+
+.sign-up-label {
+  margin: 0;
+  font-size: 0.8em;
+  color: #747474;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.sign-up-link {
+  margin-left: 1px;
+  font-size: 11px;
+  text-decoration: underline;
+  text-decoration-color: teal;
+  color: teal;
+  cursor: pointer;
+  font-weight: 800;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }

@@ -13,7 +13,7 @@ function BentoGrid(props) {
   let cardIndex = 0;
 
   return (
-    <div className=" mx-5 ">
+    <div className="mx-1 mx-md-5 ">
       <h1 className="headings">━━━<span>Top rated recipes</span>━━━</h1>
       {recipes && (
         <div className="d-flex justify-content-center">
