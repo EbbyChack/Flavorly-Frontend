@@ -32,10 +32,10 @@ function DeleteModal(props) {
             <Modal.Title id="contained-modal-title-vcenter">Are you sure you want to delete this recipe?</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <button className="btn btn-danger" onClick={() => handleDelete(props.id)}>
+            <button className="btn btn-danger rounded-5 me-3" onClick={() => handleDelete(props.id)}>
               Yes
             </button>
-            <button className="btn btn-dark" onClick={props.onHide}>
+            <button className="btn btn-dark rounded-5" onClick={props.onHide}>
               Cancel
             </button>
           </Modal.Body>

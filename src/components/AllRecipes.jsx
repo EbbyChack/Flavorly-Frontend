@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
 import FilterSidebar from "./FilterSidebar";
+import { Pagination } from "react-bootstrap";
 
 function AllRecipes() {
   const recipes = useSelector((state) => state.recipes) || { recipes: [] };
@@ -21,6 +22,9 @@ function AllRecipes() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedIngredients, setSelectedIngredients] = useState([]);
+
+  const [activePage, setActivePage] = useState(1);
+  const recipesPerPage = 9;
 
   //getting the userid from the token using jwt-decode
   const token = useSelector((state) => state.auth.loggedProfile);
@@ -83,6 +87,23 @@ function AllRecipes() {
           recipe.recipeIngredients.some((ingredient) => selectedIngredients.includes(ingredient.idIngredientFk)))
     );
 
+  // Pagination
+  const indexOfLastRecipe = activePage * recipesPerPage;
+  const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
+  const currentRecipes = filteredRecipes && filteredRecipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
+
+  const handleNextPage = () => {
+    if (activePage < Math.ceil(filteredRecipes.length / recipesPerPage)) {
+      setActivePage(activePage + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (activePage > 1) {
+      setActivePage(activePage - 1);
+    }
+  };
+
   return (
     <div className="allRecipesBackground longerPage ">
       <div className="row justify-content-center">
@@ -118,8 +139,8 @@ function AllRecipes() {
                 clearIng={clearIng}
               />
             </div>
-            {filteredRecipes && filteredRecipes.length > 0 ? (
-              filteredRecipes.map((recipe) => {
+            {currentRecipes && currentRecipes.length > 0 ? (
+              currentRecipes.map((recipe) => {
                 const isFav = userFavs && userFavs.some((fav) => fav.idRecipeFk === recipe.idRecipe);
                 return (
                   <div className="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-3" key={recipe.idRecipe}>
@@ -220,6 +241,22 @@ function AllRecipes() {
             ) : (
               <div className="d-flex justify-content-center">
                 <h3>No recipes found</h3>
+              </div>
+            )}
+
+            {/* Pagination */}
+            {filteredRecipes && filteredRecipes.length > recipesPerPage && (
+              <div className="d-flex justify-content-center mt-4">
+                {activePage > 1 && (
+                  <button className="paginationBtn me-2" onClick={handlePrevPage}>
+                    Previous
+                  </button>
+                )}
+                {activePage < Math.ceil(filteredRecipes.length / recipesPerPage) && (
+                  <button className="paginationBtn" onClick={handleNextPage}>
+                    Next
+                  </button>
+                )}
               </div>
             )}
           </div>

@@ -84,10 +84,10 @@ function UserProfile() {
                 </h3>
                 <p>@{userInfo.username}</p>
                 <p>{userInfo.email}</p>
-              </div>
-              <div>
-                <span onClick={() => setModalShow(true)}>Modify password</span>
-                <ChangePassword show={modalShow} onHide={() => setModalShow(false)} />
+                <div>
+                  <span onClick={() => setModalShow(true)}>Modify password</span>
+                  <ChangePassword show={modalShow} onHide={() => setModalShow(false)} />
+                </div>
               </div>
             </div>
 

@@ -266,7 +266,7 @@ function EditRecipeForm(props) {
 
               <div className="d-flex justify-content-end">
                 <button type="submit" className="btn btn-dark mt-3 ">
-                  Submit
+                  Edit
                 </button>
               </div>
             </form>

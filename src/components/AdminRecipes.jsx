@@ -9,6 +9,9 @@ function AdminRecipes() {
   const recipes = useSelector((state) => state.recipes) || { recipes: [] };
   const ingredientsAndCategories = useSelector((state) => state.ingredientsAndCategories.ingredientsAndCategories);
 
+  const [activePage, setActivePage] = useState(1);
+  const recipesPerPage = 9;
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,6 +22,23 @@ function AdminRecipes() {
     dispatch(setUserFavs());
   }, []);
 
+  // Pagination
+  const indexOfLastRecipe = activePage * recipesPerPage;
+  const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
+  const currentRecipes = recipes.recipes && recipes.recipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
+
+  const handleNextPage = () => {
+    if (activePage < Math.ceil(recipes.recipes.length / recipesPerPage)) {
+      setActivePage(activePage + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (activePage > 1) {
+      setActivePage(activePage - 1);
+    }
+  };
+
   const [modalShow, setModalShow] = useState(false);
 
   return (
@@ -27,14 +47,14 @@ function AdminRecipes() {
         <CreateRecipeForm show={modalShow} onHide={() => setModalShow(false)} />
         <div className="d-flex justify-content-between align-items-center">
           <h1 className="headings2">All recipes</h1>
-          <button className="btn btn-dark" onClick={() => setModalShow(true)}>
+          <button className="addRecipeBtn" onClick={() => setModalShow(true)}>
             Add recipe
           </button>
         </div>
 
         <div className="row g-4 justify-content-center justify-content-sm-start">
-          {recipes.recipes &&
-            recipes.recipes.map((recipe) => {
+          {currentRecipes &&
+            currentRecipes.map((recipe) => {
               return (
                 <div className="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-3" key={recipe.idRecipe}>
                   <div className="CustomCard">
@@ -128,6 +148,21 @@ function AdminRecipes() {
                 </div>
               );
             })}
+          {/* Pagination */}
+          {recipes.recipes && recipes.recipes.length > recipesPerPage && (
+            <div className="d-flex justify-content-center mt-4">
+              {activePage > 1 && (
+                <button className="paginationBtn me-2" onClick={handlePrevPage}>
+                  Previous
+                </button>
+              )}
+              {activePage < Math.ceil(recipes.recipes.length / recipesPerPage) && (
+                <button className="paginationBtn" onClick={handleNextPage}>
+                  Next
+                </button>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>

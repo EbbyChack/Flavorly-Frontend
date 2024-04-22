@@ -14,7 +14,17 @@ import { addNewRating, fetchAverageRating, updateRating } from "../redux/actions
 import ReactStars from "react-rating-stars-component";
 import { jwtDecode as jwt_decode } from "jwt-decode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPencil, faTrash, faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
+import {
+  faHourglass,
+  faPencil,
+  faTachographDigital,
+  faTachometerAlt,
+  faTrash,
+  faUser,
+  faUserCircle,
+  faUtensils,
+  faHeart as solidHeart,
+} from "@fortawesome/free-solid-svg-icons";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
 import EditRecipeForm from "./EditRecipeForm";
 import DeleteModal from "./DeleteModal";
@@ -143,86 +153,106 @@ function AdminRecipe() {
   const [deleteModalShow, setDeleteModalShow] = useState(false);
 
   return (
+   
+
     <div>
       {recipe ? (
-        <div className="container my-5">
-          <h1>{recipe.nameRecipe}</h1>
-          
+        <div className="recipeBg">
+          <div className="recipeContainer">
+            <div className="topSec d-flex flex-column flex-md-row justify-content-between">
+              <div>
+                {recipe.recipeCategories &&
+                  recipe.recipeCategories.map((category) => {
+                    if (ingredientsAndCategories.categories) {
+                      //searching for the category name
+                      const categoryDetails = ingredientsAndCategories.categories.find(
+                        (cat) => cat.idCategory === category.idCategoryFk
+                      );
+                      return (
+                        <small className="badge me-1" key={category.idCategoryFk}>
+                          {categoryDetails ? categoryDetails.categoryName : "Category not found"}
+                        </small>
+                      );
+                    }
+                    return null;
+                  })}
+                <h1>{recipe.nameRecipe}</h1>
+                <p>{recipe.description}</p>
 
-          <button className="btn btn-dark" onClick={() => setModalShow(true)}>
-            <FontAwesomeIcon icon={faPencil} />
-          </button>
-          <button className="btn btn-dark" onClick={() => setDeleteModalShow(true)}>
-            <FontAwesomeIcon icon={faTrash} />
-          </button>
-          <EditRecipeForm show={modalShow} onHide={() => setModalShow(false)} />
-          <DeleteModal id={id} show={deleteModalShow} onHide={() => setDeleteModalShow(false)} />
+               
+              </div>
+              <div className="d-flex justify-content-end align-items-center mb-2 mb-md-0">
+                <button className="adminBtns edit me-2" onClick={() => setModalShow(true)}>
+                  <FontAwesomeIcon icon={faPencil} />
+                </button>
+                <button className="adminBtns delete" onClick={() => setDeleteModalShow(true)}>
+                  <FontAwesomeIcon icon={faTrash} />
+                </button>
+                <EditRecipeForm show={modalShow} onHide={() => setModalShow(false)} />
+                <DeleteModal id={id} show={deleteModalShow} onHide={() => setDeleteModalShow(false)} />
+              </div>
+            </div>
+            <div className="middleSec">
+              <div className="recipeImgsContainer">
+                <div>
+                  <img src={recipe.mainImg} alt="Main" className="recipeImg" />
+                </div>
+                <div className="secondCont">
+                  <img src={recipe.img2} alt="Secondary 1" className="recipeImgSec" />
+                  <img src={recipe.img3} alt="Secondary 2" className="recipeImgSec" />
+                </div>
+              </div>
+              <div className="d-flex justify-content-center">
+                <div className="DetailsSec ">
+                  <div className="ingredientsSec">
+                    <h2>Ingredients</h2>
+                    {recipe.recipeIngredients &&
+                      recipe.recipeIngredients.map((ingredient) => {
+                        if (ingredientsAndCategories.ingredients) {
+                          const ingredientDetails = ingredientsAndCategories.ingredients.find(
+                            (ing) => ing.idIngredient === ingredient.idIngredientFk
+                          );
+                          return (
+                            <li key={ingredient.idIngredientFk}>
+                              {ingredientDetails ? ingredientDetails.nameIngredient : "Ingredient not found"}
+                            </li>
+                          );
+                        }
+                        return null;
+                      })}
+                  </div>
+                  <div className="recipeDetails">
+                    <div>
+                      <FontAwesomeIcon icon={faHourglass} className="icon" />
+                      <b>Ready in: </b>
+                      <span>{recipe.cookingTime}</span>
+                    </div>
+                    <div>
+                      <FontAwesomeIcon icon={faUtensils} className="icon" />
+                      <b>Servings: </b>
+                      <span>{recipe.servings}</span>
+                    </div>
+                    <div>
+                      <FontAwesomeIcon icon={faTachometerAlt} className="icon" />
+                      <b>Difficulty: </b>
+                      <span>{recipe.difficulty}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-          
+              <div className="instructions">
+                <h2>Instructions</h2>
+                <p>{recipe.instructions}</p>
+              </div>
 
-         
+              <iframe width="100%" className="recipeVideo" src={recipe.videoUrl}></iframe>
+            </div>
 
-          <img
-            src={recipe.mainImg}
-            alt={"img" + recipe.idRecipe}
-            style={{ width: "50%", height: "40vh", objectFit: "cover" }}
-          />
-          <img
-            src={recipe.img2}
-            alt={"img" + recipe.idRecipe}
-            style={{ width: "50%", height: "40vh", objectFit: "cover" }}
-          />
-          <img
-            src={recipe.img3}
-            alt={"img" + recipe.idRecipe}
-            style={{ width: "50%", height: "40vh", objectFit: "cover" }}
-          />
-          <p>{recipe.description}</p>
-          <p>{recipe.cookingTime}</p>
-          <p>Servings: For {recipe.servings}</p>
-          <p>Difficulty: {recipe.difficulty}</p>
-          <p>{formatDateNoTime(recipe.dateAdded)}</p>
-          <h2>Categories</h2>
-          <ul>
-            {/* mapping through the categories and getting the category name */}
-            {recipe.recipeCategories &&
-              recipe.recipeCategories.map((category) => {
-                if (ingredientsAndCategories.categories) {
-                  //searching for the category name
-                  const categoryDetails = ingredientsAndCategories.categories.find(
-                    (cat) => cat.idCategory === category.idCategoryFk
-                  );
-                  return (
-                    <li key={category.idCategoryFk}>
-                      {categoryDetails ? categoryDetails.categoryName : "Category not found"}
-                    </li>
-                  );
-                }
-                return null;
-              })}
-          </ul>
-          <h2>Ingredients</h2>
-          {recipe.recipeIngredients &&
-            recipe.recipeIngredients.map((ingredient) => {
-              if (ingredientsAndCategories.ingredients) {
-                const ingredientDetails = ingredientsAndCategories.ingredients.find(
-                  (ing) => ing.idIngredient === ingredient.idIngredientFk
-                );
-                return (
-                  <li key={ingredient.idIngredientFk}>
-                    {ingredientDetails ? ingredientDetails.nameIngredient : "Ingredient not found"}
-                  </li>
-                );
-              }
-              return null;
-            })}
-          <h2>Instructions</h2>
-          <p>{recipe.instructions}</p>
-          <iframe width="100%" height="515" src={recipe.videoUrl}></iframe>
+            
 
-          
-
-          
+           
+          </div>
         </div>
       ) : null}
     </div>
