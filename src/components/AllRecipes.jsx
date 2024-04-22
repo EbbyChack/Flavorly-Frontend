@@ -122,7 +122,7 @@ function AllRecipes() {
               filteredRecipes.map((recipe) => {
                 const isFav = userFavs && userFavs.some((fav) => fav.idRecipeFk === recipe.idRecipe);
                 return (
-                  <div className="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3" key={recipe.idRecipe}>
+                  <div className="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-3" key={recipe.idRecipe}>
                     <div className="CustomCard">
                       <div className="content">
                         <div className="back">
@@ -203,6 +203,9 @@ function AllRecipes() {
                                       </span>
                                       <span className="button-text">View recipe</span>
                                     </button>
+                                  </Link>
+                                  <Link to={`/recipe/${recipe.idRecipe}`} className="mobile-special-button">
+                                    View recipe
                                   </Link>
                                 </div>
                               </div>

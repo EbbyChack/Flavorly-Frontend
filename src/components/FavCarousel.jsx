@@ -7,7 +7,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector } from "react-redux";
 import { faSearch, faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 
-
 function FavCarousel(props) {
   const recipes = props.recipes;
   const responsive = {
@@ -147,6 +146,9 @@ function FavCarousel(props) {
                                   </span>
                                   <span className="button-text">View recipe</span>
                                 </button>
+                              </Link>
+                              <Link to={`/recipe/${recipe.idRecipe}`} className="mobile-special-button">
+                                View recipe
                               </Link>
                             </div>
                           </div>

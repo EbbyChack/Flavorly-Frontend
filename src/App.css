@@ -339,7 +339,7 @@
 .filterBtn {
   background: none;
   border: none;
-  font-size: 2em;
+  font-size: clamp(1.2em, 2.5vw, 2em);
   font-weight: 700;
   line-height: 1px;
   padding-block: 0.3em;
@@ -438,6 +438,20 @@
 @media (max-width: 991px) {
   .CustomCard {
     height: 20em;
+  }
+}
+@media (max-width: 600px) {
+  .CustomCard {
+    height: 18em;
+    font-size: 0.9em;
+  }
+  .CustomCard p {
+    font-size: 0.6em;
+  }
+
+  .CustomCard .badge{
+    font-size: 0.6em;
+  
   }
 }
 
@@ -680,6 +694,45 @@
 .special-button button:hover .button-text {
   color: #fff;
 }
+
+.mobile-special-button{
+  background-color: #00000077;
+  padding: 0.7em;
+  border-radius: 50px;
+  text-decoration: none;
+  color: #ffffff;
+  font-family: inherit;
+  text-transform: uppercase;
+  font-size: 0.6em;
+  font-weight: 700;
+  text-align: center;
+}
+
+.mobile-special-button:active{
+  background-color: #FFD736;
+}
+
+@media (max-width: 991px) {
+  .special-button {
+    display: none;
+  }
+
+  .mobile-special-button {
+    display: block;
+  }
+}
+
+@media (min-width: 992px) {
+  .special-button {
+    display: block;
+  }
+
+  .mobile-special-button {
+    display: none;
+  }
+}
+
+/* heart icon */
 
 .heartIcon {
   color: #24bb59;

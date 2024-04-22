@@ -21,7 +21,7 @@ function RecipesCarousel(props) {
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
-      items: 1,
+      items: 2,
       
     },
   };
@@ -99,6 +99,9 @@ function RecipesCarousel(props) {
                                   </span>
                                   <span className="button-text">View recipe</span>
                                 </button>
+                              </Link>
+                              <Link to={`/recipe/${recipe.idRecipe}`} className="mobile-special-button">
+                              View recipe
                               </Link>
                             </div>
                           </div>

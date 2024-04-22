@@ -22,8 +22,8 @@ function AdminRecipes() {
   const [modalShow, setModalShow] = useState(false);
 
   return (
-    <div className="allRecipesBackground d-flex justify-content-center">
-      <div className="container m-5">
+    <div className="allRecipesBackground longerPage">
+      <div className="container">
         <CreateRecipeForm show={modalShow} onHide={() => setModalShow(false)} />
         <div className="d-flex justify-content-between align-items-center">
           <h1 className="headings2">All recipes</h1>
@@ -36,7 +36,7 @@ function AdminRecipes() {
           {recipes.recipes &&
             recipes.recipes.map((recipe) => {
               return (
-                <div className="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3" key={recipe.idRecipe}>
+                <div className="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-3" key={recipe.idRecipe}>
                   <div className="CustomCard">
                     <div className="content">
                       <div className="back">
@@ -114,6 +114,9 @@ function AdminRecipes() {
                                     </span>
                                     <span className="button-text">View recipe</span>
                                   </button>
+                                </Link>
+                                <Link to={`/recipe/${recipe.idRecipe}`} className="mobile-special-button">
+                                  View recipe
                                 </Link>
                               </div>
                             </div>
