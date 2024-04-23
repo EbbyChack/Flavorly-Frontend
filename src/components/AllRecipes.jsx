@@ -24,7 +24,7 @@ function AllRecipes() {
   const [selectedIngredients, setSelectedIngredients] = useState([]);
 
   const [activePage, setActivePage] = useState(1);
-  const recipesPerPage = 9;
+  const recipesPerPage = 8;
 
   //getting the userid from the token using jwt-decode
   const token = useSelector((state) => state.auth.loggedProfile);
@@ -209,7 +209,7 @@ function AllRecipes() {
                                     <FontAwesomeIcon className="heartIcon" icon={isFav ? solidHeart : null} />
                                   </p>
                                   <p className="card-subtitle">Description:</p>
-                                  <p>{recipe.description}</p>
+                                  <p className="card-description">{recipe.description}</p>
                                   <p className="card-subtitle">Difficulty:</p>
                                   <p>{recipe.difficulty}</p>
                                 </div>

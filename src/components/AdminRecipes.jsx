@@ -10,7 +10,7 @@ function AdminRecipes() {
   const ingredientsAndCategories = useSelector((state) => state.ingredientsAndCategories.ingredientsAndCategories);
 
   const [activePage, setActivePage] = useState(1);
-  const recipesPerPage = 9;
+  const recipesPerPage = 8;
 
   const dispatch = useDispatch();
 
@@ -119,7 +119,7 @@ function AdminRecipes() {
                                   <strong>{recipe.nameRecipe}</strong>
                                 </p>
                                 <p className="card-subtitle">Description:</p>
-                                <p>{recipe.description}</p>
+                                <p className="card-description">{recipe.description}</p>
                                 <p className="card-subtitle">Difficulty:</p>
                                 <p>{recipe.difficulty}</p>
                               </div>

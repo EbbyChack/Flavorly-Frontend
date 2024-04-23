@@ -131,7 +131,7 @@ function FavCarousel(props) {
                                 <FontAwesomeIcon className="heartIcon" icon={solidHeart} />
                               </p>
                               <p className="card-subtitle">Description:</p>
-                              <p>{recipe.description}</p>
+                              <p className="card-description">{recipe.description}</p>
                               <p className="card-subtitle">Difficulty:</p>
                               <p>{recipe.difficulty}</p>
                             </div>

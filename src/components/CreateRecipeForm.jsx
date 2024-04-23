@@ -3,7 +3,6 @@ import { Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { addRecipe } from "../redux/actions/recipes";
 
-
 import { ToastContainer, toast } from "react-toastify";
 import ReactSelect from "react-select";
 
@@ -71,6 +70,11 @@ function CreateRecipeForm(props) {
 
     dispatch(addRecipe(recipeObj));
     props.onHide();
+    toast.success("Recipe added successfully");
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
   };
   return (
     <div>
@@ -126,14 +130,19 @@ function CreateRecipeForm(props) {
             </div>
             <div className="form-group">
               <label htmlFor="difficulty">Difficulty</label>
-              <input
-                type="text"
+              <select
                 className="form-control"
                 id="difficulty"
-                placeholder="Enter Difficulty"
                 value={difficulty}
+               
                 onChange={(e) => setDifficulty(e.target.value)}
-              />
+              >
+                <option value="" disabled>Select Difficulty</option>
+                <option value="Super easy">Super easy</option>
+                <option value="Easy">Easy</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Hard">Hard</option>
+              </select>
             </div>
             <div className="form-group">
               <label htmlFor="instructions">Instructions</label>

@@ -32,7 +32,7 @@ function BentoGrid(props) {
                       {rowValues.map((value, columnIndex) => {
                         const recipe = recipes[cardIndex++ % recipes.length];
                         return (
-                          <Col key={`${rowIndex}-${columnIndex}`} xs={12} md={value}>
+                          <Col key={`${rowIndex}-${columnIndex}`} md={12} lg={value}>
                             {recipe && (
                               <>
                                 <Link to={`/recipe/${recipe.idRecipe}`}>
@@ -72,7 +72,7 @@ function BentoGrid(props) {
                                                   <strong>{recipe.nameRecipe}</strong>
                                                 </p>
                                                 <p className="card-subtitle">Description:</p>
-                                                <p>{recipe.description}</p>
+                                                <p className="card-description">{recipe.description}</p>
                                                 <p className="card-subtitle">Difficulty:</p>
                                                 <p>{recipe.difficulty}</p>
                                               </div>

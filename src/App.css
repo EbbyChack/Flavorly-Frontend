@@ -435,6 +435,12 @@
   height: 26em;
 }
 
+.card-description{
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
 @media (max-width: 991px) {
   .CustomCard {
     height: 20em;

@@ -61,14 +61,14 @@ function UserProfile() {
     setNumCommentsToShow(3);
   };
 
-  const [numRatingsToShow, setNumRatingsToShow] = useState(3);
+  const [numRatingsToShow, setNumRatingsToShow] = useState(2);
 
   const handleSeeMoreRatings = () => {
     setNumRatingsToShow(userInfo.ratings.length);
   };
 
   const handleSeeLessRatings = () => {
-    setNumRatingsToShow(3);
+    setNumRatingsToShow(2);
   };
 
   return (
@@ -141,7 +141,7 @@ function UserProfile() {
                     const recipe = recipes && recipes.find((recipe) => recipe.idRecipe === rating.idRecipeFk);
                     return (
                       recipe && (
-                        <div className="col-lg-6 col-xl-4" key={rating.idRating}>
+                        <div className="col-lg-6 " key={rating.idRating}>
                           <div className="profileRating">
                             <Link className="linkTo" to={`/recipe/${recipe.idRecipe}`}>
                               {recipe.nameRecipe}
@@ -160,7 +160,7 @@ function UserProfile() {
                     );
                   })}
               </div>
-              {numRatingsToShow <= 3 ? (
+              {numRatingsToShow <= 2 ? (
                 <div className="d-flex justify-content-end">
                   <span className=" seeMore " onClick={handleSeeMoreRatings}>
                     See More...

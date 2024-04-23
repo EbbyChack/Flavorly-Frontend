@@ -33,6 +33,14 @@ function Home() {
     recipes.recipes &&
     recipes.recipes.filter((recipe) => recipe.recipeCategories.some((category) => category.idCategoryFk === 2));
 
+  const amercianRecipes =
+    recipes.recipes &&
+    recipes.recipes.filter((recipe) => recipe.recipeCategories.some((category) => category.idCategoryFk === 9));
+
+  const veganRecipes =
+    recipes.recipes &&
+    recipes.recipes.filter((recipe) => recipe.recipeCategories.some((category) => category.idCategoryFk === 11));
+
   return (
     <div className="homeBg">
       <ToastContainer />
@@ -47,10 +55,11 @@ function Home() {
 
       <div className="px-md-5">
         <BentoGrid recipes={topRecipes} />
-       
 
         {recipes.recipes && <RecipesCarousel title={"Quick recipes"} recipes={quickRecipes} />}
         {recipes.recipes && <RecipesCarousel title={"Italian dishes"} recipes={italianRecipes} />}
+        {recipes.recipes && <RecipesCarousel title={"American dishes"} recipes={amercianRecipes} />}
+        {recipes.recipes && <RecipesCarousel title={"Vegan dishes"} recipes={veganRecipes} />}
       </div>
       <Eyes />
     </div>
