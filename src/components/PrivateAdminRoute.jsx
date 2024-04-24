@@ -7,6 +7,7 @@ import Home from "./Home";
 const PrivateAdminRoute = () => {
   const isLoggedIn = useSelector((state) => Boolean(state.auth.loggedProfile));
 
+  //Checking the role of the user
   const token = useSelector((state) => state.auth.loggedProfile);
 
   let role = "";
