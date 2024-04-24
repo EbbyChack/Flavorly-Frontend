@@ -4,7 +4,8 @@ import { fetchAllRecipes, fetchUserFavs } from "../redux/actions/recipes";
 import { Link } from "react-router-dom";
 import { jwtDecode as jwt_decode } from "jwt-decode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
+import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import FilterSidebar from "./FilterSidebar";
 import { Pagination } from "react-bootstrap";
 

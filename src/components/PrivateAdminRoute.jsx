@@ -1,7 +1,8 @@
 import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 import { jwtDecode as jwt_decode } from "jwt-decode";
-import AllRecipes from "./AllRecipes";
+
+import Home from "./Home";
 
 const PrivateAdminRoute = () => {
   const isLoggedIn = useSelector((state) => Boolean(state.auth.loggedProfile));
@@ -17,7 +18,7 @@ const PrivateAdminRoute = () => {
   }
 
   function MountedComponent() {
-    return AllRecipes(true);
+    return Home(true);
   }
 
   return <div>{isLoggedIn && role === "Admin" ? <Outlet /> : <MountedComponent />}</div>;

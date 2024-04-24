@@ -6,11 +6,11 @@ const initialState = {
     loggedProfile: null,
 };
 
-//authSlice is created using createSlice function
+
 const authSlice = createSlice({
     name: "authReducer",
     initialState,
-    //reducers are functions that take the current state and an action, and return a new state
+
     reducers: {
         login(state, action) {
             state.loggedProfile = action.payload;

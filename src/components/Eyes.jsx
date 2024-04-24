@@ -2,22 +2,27 @@ import { useState, useEffect, useRef } from "react";
 import Burger from "../assets/img/Burgir 2.png";
 
 function Eyes() {
+  // Create a state to store the mouse coordinates
   const [mouseCoordinates, setMouseCoordinates] = useState({ x: 0, y: 0 });
 
+  // Create refs for the eyes elements to get their position
   const eyeLeft = useRef();
   const eyeRight = useRef();
 
+  // Function to calculate the angle of the eyes based on the mouse position
   function calcAngle(element) {
+    // Check if the element exists
     if (!element.current) return;
 
-    let rect = element.current.getBoundingClientRect();
+    // Get the center of the element
+    let rect = element.current.getBoundingClientRect(); //Returns the size of an element and its position relative to the viewport
     let elX = rect.left + rect.width / 2;
     let elY = rect.top + rect.height / 2;
 
-    // Calculate the angle in radians
+    // Calculate the angle based on the mouse position
     let rad = Math.atan2(mouseCoordinates.y - elY, mouseCoordinates.x - elX);
 
-    // Convert radians to degrees
+    // Convert the angle from radians to degrees
     let deg = rad * (180 / Math.PI);
 
     // Adjust the rotation angle based on the position of the mouse

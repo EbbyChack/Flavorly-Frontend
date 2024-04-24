@@ -26,12 +26,7 @@ function RecipesCarousel(props) {
     },
   };
 
-  const CustomLeftArrow = ({ onClick, ...rest }) => {
-    return <button onClick={onClick} {...rest} className="custom-arrow-left"> <FontAwesomeIcon icon={faArrowLeft} /></button>;
-  };
-  const CustomRightArrow = ({ onClick, ...rest }) => {
-    return <button onClick={onClick} {...rest} className="custom-arrow-right"> <FontAwesomeIcon icon={faArrowRight} /></button>;
-  };
+  
   return (
     <div className="CarouselCustom container  ">
       <h1 className="headings">━━━<span>{props.title}</span>━━━</h1>

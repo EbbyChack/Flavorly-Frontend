@@ -3,13 +3,16 @@ import { Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 function BentoGrid(props) {
+  // Array of values for the columns in each row
   const rowColumnValues = [
-    [6, 3, 3], // Values for the first row
+    [6, 3, 3], 
     [3, 4, 5],
     [4, 5, 3],
   ];
 
+  // Get the recipes from the props
   const recipes = props.recipes;
+  // Initialize the card index
   let cardIndex = 0;
 
   return (
@@ -22,16 +25,19 @@ function BentoGrid(props) {
         <div className="d-flex justify-content-center">
           <Col xs={12} className="colBento">
             <div className="scrollable-row">
+              {/* Generate an array with 100 elements, which is filled with undefined values(using fill() method) and then map over it to generate 100 rows. */}
               {Array(100)
                 .fill()
                 .map((_, rowIndex) => {
-                  // Generate 100 rows
+                  // Get the values for the columns in the row
                   const rowValues = rowColumnValues[rowIndex % rowColumnValues.length];
                   return (
                     <Row key={rowIndex} className="g-2 m-1">
                       {rowValues.map((value, columnIndex) => {
+                        // recipe will cycle through the recipes in recipes as cardIndex increments
                         const recipe = recipes[cardIndex++ % recipes.length];
                         return (
+                          // Create a column with the value from the rowValues array
                           <Col key={`${rowIndex}-${columnIndex}`} md={12} lg={value}>
                             {recipe && (
                               <>

@@ -12,14 +12,7 @@ import {
 import { addNewRating, fetchAverageRating, updateRating } from "../redux/actions/ratings";
 import { jwtDecode as jwt_decode } from "jwt-decode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faHourglass,
-  faPencil,
-  faTachometerAlt,
-  faTrash,
-  faUtensils,
-  faHeart as solidHeart,
-} from "@fortawesome/free-solid-svg-icons";
+import { faHourglass, faPencil, faTachometerAlt, faTrash, faUtensils } from "@fortawesome/free-solid-svg-icons";
 
 import EditRecipeForm from "./EditRecipeForm";
 import DeleteModal from "./DeleteModal";

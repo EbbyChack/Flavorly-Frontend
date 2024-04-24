@@ -6,19 +6,28 @@ const Sentences = () => {
   const [charIndex, setCharIndex] = useState(0);
 
   useEffect(() => {
+    // Set interval to change the sentence every 9 seconds
     const interval = setInterval(() => {
+      // Transition out the text
       setIsTransitioning(true);
+      // Set timeout to transition in the new text
       setTimeout(() => {
+        // If the current sentence is the last one, go back to the first one
         setShowSentence((prev) => (prev < 3 ? prev + 1 : 0));
+        // Reset the character index
         setCharIndex(0);
+        // Transition in the new text
         setIsTransitioning(false);
       }, 500);
     }, 9000);
 
+    // Set interval to show the characters of the sentence
     const charInterval = setInterval(() => {
+      // If the character index is less than the length of the sentence, increment it
       if (charIndex < sentences[showSentence].length - 1) {
         setCharIndex((prev) => prev + 1);
       } else {
+        // If the character index is equal to the length of the sentence, clear the interval
         clearInterval(charInterval);
       }
     }, 70);
@@ -38,7 +47,9 @@ const Sentences = () => {
 
   return (
     <div className="container">
+      {/* Add the class based on the transition state */}
       <div className={`sentence ${isTransitioning ? "transition-text-out" : "transition-text-in"}`}>
+        {/* Show the characters of the sentence based on the character index */}
         {sentences[showSentence].substring(0, charIndex)}
       </div>
     </div>

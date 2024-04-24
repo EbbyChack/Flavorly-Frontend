@@ -5,6 +5,7 @@ import LoginForm from "./LoginForm";
 const PrivateRoute = () => {
   const isLoggedIn = useSelector((state) => Boolean(state.auth.loggedProfile));
 
+  // function to render the LoginForm component
   function MountedComponent() {
     return LoginForm(true);
   }
