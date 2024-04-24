@@ -3,12 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { fetchIngredientsAndCategories } from "../redux/actions/ingAndCat";
 
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import { fetchTopRecipes } from "../redux/actions/recipes";
 import BentoGrid from "./BentoGrid";
 import RecipesCarousel from "./RecipesCarousel";
 import HomeBackground from "../assets/video/HomeBackground.mp4";
-import savor from "../assets/img/savor.png";
 import Eyes from "./Eyes";
 import Sentences from "./Sentences";
 

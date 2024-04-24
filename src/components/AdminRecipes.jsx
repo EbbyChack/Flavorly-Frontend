@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllRecipes } from "../redux/actions/recipes";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import CreateRecipeForm from "./CreateRecipeForm";
 import { setUserFavs } from "../redux/reducers/recipeReducer";
 

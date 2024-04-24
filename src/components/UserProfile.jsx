@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserInfo } from "../redux/actions/user";
-import { formatDateNoTime } from "../utils/utils";
 import { formatDate } from "../utils/utils";
 import ReactStars from "react-rating-stars-component";
 import { fetchAllRecipes, fetchUserFavs } from "../redux/actions/recipes";
@@ -10,11 +9,7 @@ import { jwtDecode as jwt_decode } from "jwt-decode";
 import ChangePassword from "./ChangePassword";
 
 import { ToastContainer } from "react-toastify";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCog } from "@fortawesome/free-solid-svg-icons";
-import RecipesCarousel from "./RecipesCarousel";
 import FavCarousel from "./FavCarousel";
-import CommentsCarousel from "./CommentsCarousel";
 
 function UserProfile() {
   const dispatch = useDispatch();

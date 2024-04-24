@@ -5,7 +5,7 @@ import "react-multi-carousel/lib/styles.css";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector } from "react-redux";
-import { faSearch, faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
+import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 
 function FavCarousel(props) {
   const recipes = props.recipes;

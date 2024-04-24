@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   addComment,
   addUserFav,
@@ -9,19 +9,15 @@ import {
   fetchUserFavs,
   softDeleteComment,
 } from "../redux/actions/recipes";
-import { formatDate, formatDateNoTime } from "../utils/utils";
+import { formatDate } from "../utils/utils";
 import { addNewRating, fetchAverageRating, updateRating } from "../redux/actions/ratings";
 import ReactStars from "react-rating-stars-component";
 import { jwtDecode as jwt_decode } from "jwt-decode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHourglass,
-  faPencil,
-  faTachographDigital,
   faTachometerAlt,
   faTrash,
-  faUser,
-  faUserCircle,
   faUtensils,
   faHeart as solidHeart,
 } from "@fortawesome/free-solid-svg-icons";
@@ -275,7 +271,7 @@ function Recipe() {
                             <p className="user">@{comment.username}</p>
                             <p className="commentText">{comment.commentText}</p>
                           </div>
-                         
+
                           <div className="col-lg-5">
                             <p className="time">{formatDate(comment.datePosted)}</p>
                           </div>

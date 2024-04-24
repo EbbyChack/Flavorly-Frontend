@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllRecipes, fetchUserFavs } from "../redux/actions/recipes";
-import { Link, useNavigate } from "react-router-dom";
-import { setUserFavs } from "../redux/reducers/recipeReducer";
+import { Link } from "react-router-dom";
 import { jwtDecode as jwt_decode } from "jwt-decode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
-import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
 import FilterSidebar from "./FilterSidebar";
 import { Pagination } from "react-bootstrap";
 

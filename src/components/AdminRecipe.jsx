@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   addComment,
   addUserFav,
@@ -9,23 +9,18 @@ import {
   fetchUserFavs,
   softDeleteComment,
 } from "../redux/actions/recipes";
-import { formatDate, formatDateNoTime } from "../utils/utils";
 import { addNewRating, fetchAverageRating, updateRating } from "../redux/actions/ratings";
-import ReactStars from "react-rating-stars-component";
 import { jwtDecode as jwt_decode } from "jwt-decode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHourglass,
   faPencil,
-  faTachographDigital,
   faTachometerAlt,
   faTrash,
-  faUser,
-  faUserCircle,
   faUtensils,
   faHeart as solidHeart,
 } from "@fortawesome/free-solid-svg-icons";
-import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
+
 import EditRecipeForm from "./EditRecipeForm";
 import DeleteModal from "./DeleteModal";
 import { clearSingleRecipe } from "../redux/reducers/recipeReducer";
@@ -153,8 +148,6 @@ function AdminRecipe() {
   const [deleteModalShow, setDeleteModalShow] = useState(false);
 
   return (
-   
-
     <div>
       {recipe ? (
         <div className="recipeBg">
@@ -178,8 +171,6 @@ function AdminRecipe() {
                   })}
                 <h1>{recipe.nameRecipe}</h1>
                 <p>{recipe.description}</p>
-
-               
               </div>
               <div className="d-flex justify-content-end align-items-center mb-2 mb-md-0">
                 <button className="adminBtns edit me-2" onClick={() => setModalShow(true)}>
@@ -248,10 +239,6 @@ function AdminRecipe() {
 
               <iframe width="100%" className="recipeVideo" src={recipe.videoUrl}></iframe>
             </div>
-
-            
-
-           
           </div>
         </div>
       ) : null}
