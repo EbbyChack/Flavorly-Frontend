@@ -1,12 +1,10 @@
-/* navbar */
+/* FONT IMPORTS */
 @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
-
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap");
-
 @import url("https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Quattrocento:wght@400;700&display=swap");
-
 @import url("https://fonts.googleapis.com/css2?family=Mate:ital@0;1&display=swap");
 
+/* HEADINGS */
 .headings {
   font-family: "Cormorant Garamond", serif;
   font-size: 0.5em;
@@ -32,6 +30,7 @@
   font-weight: 500;
 }
 
+/* NAVBAR */
 .customNav {
   background-color: #ffffff;
   border-bottom: 1px solid #e9ecef;
@@ -123,74 +122,7 @@
 .customNav .navbar-toggler:focus {
   box-shadow: none;
 }
-
-.logoutBtn {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  width: 45px;
-  height: 45px;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition-duration: 0.3s;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
-  background-color: #ffd736;
-}
-
-/* plus sign */
-.sign {
-  width: 100%;
-  transition-duration: 0.3s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.sign svg {
-  width: 20px;
-}
-
-.sign svg path {
-  fill: white;
-}
-/* text */
-.text {
-  position: absolute;
-  right: 0%;
-  width: 0%;
-  opacity: 0;
-  color: white;
-  font-size: 1em;
-  font-weight: 600;
-  transition-duration: 0.3s;
-}
-/* hover effect on button width */
-.logoutBtn:hover {
-  width: 125px;
-  border-radius: 40px;
-  transition-duration: 0.3s;
-}
-
-.logoutBtn:hover .sign {
-  width: 30%;
-  transition-duration: 0.3s;
-  padding-left: 20px;
-}
-/* hover effect button's text */
-.logoutBtn:hover .text {
-  opacity: 1;
-  width: 70%;
-  transition-duration: 0.3s;
-  padding-right: 10px;
-}
-/* button click effect*/
-.logoutBtn:active {
-  transform: translate(2px, 2px);
-}
-
+/* navbar link animation */
 @media (min-width: 991px) {
   .customNav .customNavLink {
     position: relative;
@@ -218,6 +150,7 @@
   }
 }
 
+/* NAVBAR COLLAPSE */
 @media (max-width: 991px) {
   .navbar-collapse {
     position: fixed;
@@ -264,6 +197,76 @@
     object-fit: cover;
   }
 }
+
+/* LOGOUT BUTTON */
+.logoutBtn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition-duration: 0.3s;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+  background-color: #ffd736;
+}
+
+/* plus sign */
+.sign {
+  width: 100%;
+  transition-duration: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sign svg {
+  width: 20px;
+}
+
+.sign svg path {
+  fill: white;
+}
+
+.text {
+  position: absolute;
+  right: 0%;
+  width: 0%;
+  opacity: 0;
+  color: white;
+  font-size: 1em;
+  font-weight: 600;
+  transition-duration: 0.3s;
+}
+/* hover effect on button width */
+.logoutBtn:hover {
+  width: 125px;
+  border-radius: 40px;
+  transition-duration: 0.3s;
+}
+
+.logoutBtn:hover .sign {
+  width: 30%;
+  transition-duration: 0.3s;
+  padding-left: 20px;
+}
+/* hover effect button's text */
+.logoutBtn:hover .text {
+  opacity: 1;
+  width: 70%;
+  transition-duration: 0.3s;
+  padding-right: 10px;
+}
+/* button click effect*/
+.logoutBtn:active {
+  transform: translate(2px, 2px);
+}
+
+/* BENTOGRID */
 .bentoImg {
   height: 40vh;
   width: 100%;
@@ -297,7 +300,7 @@
   }
 }
 
-/* background */
+/* ALL RECIPES BACKGROUND PAGE */
 
 .allRecipesBackground {
   background-image: url("../src/assets/img/marble.jpg");
@@ -324,6 +327,7 @@
   }
 }
 
+/* ALL RECIPES FILTER */
 .filterSidebar {
   font-family: "Cormorant Garamond", serif;
   margin-top: 3.5em;
@@ -420,14 +424,70 @@
   }
 }
 
+/* HOME PAGE */
 .homeBg {
   background-image: url("../src/assets/img/marble.jpg");
   background-repeat: repeat-y;
   background-position: center;
   background-size: cover;
 }
+/* HOME HERO WITH VIDEO */
+.topHomeBanner {
+  background-color: #eccf5a27;
 
-/* cards */
+  background-size: cover;
+  background-position: center;
+
+  border-radius: 5px;
+
+  color: rgb(0, 0, 0);
+  position: relative;
+}
+
+.topHomeBanner #myVideo {
+  width: 100%;
+  height: 50vh;
+  object-position: center;
+  object-fit: cover;
+  filter: brightness(0.4);
+}
+
+@media (max-width: 991px) {
+  .topHomeBanner #myVideo {
+    height: 30vh;
+  }
+
+  .topHomeBanner .videoText {
+    font-size: 1.1em;
+  }
+}
+
+.topHomeBanner .videoText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffffff;
+}
+/* HOMEPAGE VIDEO TEXT */
+.sentence {
+  font-size: clamp(1em, 2.5vw, 4em);
+  font-weight: 300;
+  font-family: "DM Serif Display", serif;
+  padding: 0.5em;
+  filter: drop-shadow(0 0 20px #000000);
+}
+
+.transition-text-out {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out; /* You can adjust the transition duration and timing function as needed */
+}
+
+.transition-text-in {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out; /* You can adjust the transition duration and timing function as needed */
+}
+/* CUSTOM CARD */
 
 .CustomCard {
   overflow: visible;
@@ -435,7 +495,7 @@
   height: 26em;
 }
 
-.card-description{
+.card-description {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -460,6 +520,7 @@
   }
 }
 
+/* BENTO GRID CARD */
 .BentoCustomCard {
   overflow: visible;
   width: 100%;
@@ -637,7 +698,7 @@
   font-size: 0.7em;
 }
 
-/* button */
+/* SPECIAL CARD BUTTON */
 .special-button button {
   position: relative;
   display: inline-block;
@@ -763,7 +824,7 @@
   }
 }
 
-/* heart icon */
+/*HEART ICON */
 
 .heartIcon {
   color: #24bb59;
@@ -772,50 +833,13 @@
   z-index: 100;
 }
 
-.topHomeBanner {
-  background-color: #eccf5a27;
-
-  background-size: cover;
-  background-position: center;
-
-  border-radius: 5px;
-
-  color: rgb(0, 0, 0);
-  position: relative;
-}
-
-.topHomeBanner #myVideo {
-  width: 100%;
-  height: 50vh;
-  object-position: center;
-  object-fit: cover;
-  filter: brightness(0.6);
-}
-
-@media (max-width: 991px) {
-  .topHomeBanner #myVideo {
-    height: 30vh;
-  }
-
-  .topHomeBanner .videoText {
-    font-size: 1.1em;
-  }
-}
-
-.topHomeBanner .videoText {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #ffffff;
-}
-
+/* REACT CAROUSEL CUSTOMIZATION */
 .react-multiple-carousel__arrow {
   position: absolute;
   font-size: 2em;
-  color: rgb(209, 21, 21);
+  color: rgb(255, 255, 255);
   border: none;
-  background: rgba(245, 0, 0, 0.438);
+  background: rgba(0, 0, 0, 0.438);
   padding: 0.5em 0.2em;
   border-radius: 0%;
   z-index: 1 !important;
@@ -843,7 +867,7 @@
   }
 }
 
-/* footer */
+/* FOOTER */
 .footerCustom {
   background-color: #000000;
   padding: 30px;
@@ -896,11 +920,12 @@
   color: #000000;
 }
 
+/* TO MAKE THE PAGES LONGER AND STICK THE FOOTER TO THE BOTTOM */
 .longerPage {
   min-height: 80vh;
 }
 
-/* buger */
+/* BURGER */
 @media (max-width: 991px) {
   .allContainer {
     display: none;
@@ -998,7 +1023,7 @@
   }
 }
 
-/* search input */
+/* SEARCH INPUT */
 
 .search {
   position: relative;
@@ -1059,7 +1084,7 @@
   text-decoration: underline;
 }
 
-/* recipe page */
+/* SINGLE RECIPE PAGE */
 
 .recipeBg {
   background-image: url("../src/assets/img/marble.jpg");
@@ -1306,7 +1331,7 @@
   background-color: #f3db7b;
 }
 
-/* profile */
+/* USER PROFILE PAGE */
 
 .profileBg {
   background-image: url("../src/assets/img/marble.jpg");
@@ -1424,25 +1449,7 @@
   text-decoration: underline;
 }
 
-.sentence {
-  font-size: clamp(1em, 2.5vw, 4em);
-  font-weight: 300;
-  font-family: "DM Serif Display", serif;
-  padding: 0.5em;
-  filter: drop-shadow(0 0 20px #fafafa);
-}
-
-.transition-text-out {
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out; /* You can adjust the transition duration and timing function as needed */
-}
-
-.transition-text-in {
-  opacity: 1;
-  transition: opacity 0.5s ease-in-out; /* You can adjust the transition duration and timing function as needed */
-}
-
-/* login form */
+/* LOGIN FORM */
 
 .loginBg {
   background-image: url("../src/assets/img/blur.jpg");
@@ -1543,6 +1550,7 @@
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
+/* PAGINATION */
 .paginationBtn {
   color: rgb(255, 255, 255);
   background-color: #ffcc00ad;
@@ -1560,6 +1568,7 @@
   transform: scale(1.1);
 }
 
+/* OTHER BUTTONS */
 .addRecipeBtn {
   background-color: #000000;
   color: #ffffff;
