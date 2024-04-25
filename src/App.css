@@ -469,6 +469,14 @@
   transform: translate(-50%, -50%);
   color: #ffffff;
 }
+
+@media (max-width: 991px) {
+  .topHomeBanner .videoText {
+    top: 50%;
+    left: 40%;
+    transform: translate(-40%, -50%);
+  }
+}
 /* HOMEPAGE VIDEO TEXT */
 .sentence {
   font-size: clamp(1em, 2.5vw, 4em);
