@@ -1,1 +1,1 @@
-La parte backend si trova nella repository Flavorly-Backend, dentro si trova anche il backup del db.
+Flavorly-Frontend is the React-based frontend for a recipe website designed to provide users with a seamless and visually appealing experience for discovering recipes.
